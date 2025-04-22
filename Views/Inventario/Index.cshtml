@@ -1,0 +1,50 @@
+﻿@* @model IEnumerable<One_Vision.Models.Producto> *@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inventario</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info me-1 text-white">Agregar nuevo paciente</a>
+</p>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>PrecioVenta</th>
+            <th>PrecioCompra</th>
+            <th>Categoria</th>
+            <th>Proveedor</th>
+            <th>Moda</th>
+            <th>Diseño</th>
+            <th>Color</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+@*         @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Código</td>
+                <td>@item.Nombre</td>
+                <td>@item.Precio_Venta</td>
+                <td>@item.Precio_Compra</td>
+                <td>@item.Categoria</td>
+                <td>@item.Proveedor</td>
+                <td>@item.Moda</td>
+                <td>@item.Diseño</td>
+                <td>@item.Color</td>
+                <td>@item.Fecha</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Código" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Código" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Código" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        } *@
+    </tbody>
+</table>
+

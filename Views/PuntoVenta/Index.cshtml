@@ -1,0 +1,80 @@
+﻿@model One_Vision.Models.PacienteProductoViewModel
+   
+
+@{
+    ViewData["Title"] = "Punto de venta";
+}
+
+<h1>Punto de venta</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info me-1 text-white">Agregar nuevo paciente</a>
+      <a asp-action="Details" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+      <a asp-action="Delete"  class="btn btn-sm btn-danger">Eliminar</a>
+</p>
+
+<h2 style="line-height: 1.8;">
+    Registro de paciente para venta
+</h2>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pacientes)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Edad</td>
+                <td>@item.Telefono</td>
+                <td>@item.Correo</td>
+                <td>@item.Direccion</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2 style="line-height: 1.8;">
+    Registro de producto
+</h2>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Nombre del producto</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Productos)
+        {
+            <tr>
+                <td>@item.Nombre_Producto</td>
+                <td>@item.Precio</td>
+                <td>@item.Descripción_Producto</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID_Producto" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ID_Producto" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID_Producto" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
