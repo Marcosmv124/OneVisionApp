@@ -3,44 +3,147 @@
   "WorkspaceRootPath": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\one vision.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:one vision.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\historial\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\historial\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\AppData\\Local\\Temp\\5bbjfhwk..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\controllers\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:controllers\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\controllers\\puntoventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:controllers\\puntoventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\controllers\\historialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:controllers\\historialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\examen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\examen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\onevisiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\onevisiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\paciente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\paciente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\historial\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\historial\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\historial\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\historial\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\inventario\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\inventario\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\inventario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\inventario\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\puntoventa\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\puntoventa\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\puntoventa\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\puntoventa\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\AppData\\Local\\Temp\\ybuf0is3..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\historial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\historial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Migrations\\20250429004209_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20250429004209_Inicial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\puntoventa\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\puntoventa\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\home\\vision.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\home\\vision.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\imagenes\\onevision.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:imagenes\\onevision.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|c:\\users\\marco\\onedrive\\escritorio\\one vision\\models\\pacienteproductoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{506FBCD7-2E6C-46ED-B621-EC03AAAA6522}|One Vision.csproj|solutionrelative:models\\pacienteproductoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\AppData\\Local\\Temp\\ybuf0is3..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\AppData\\Local\\Temp\\ybuf0is3..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\marco\\AppData\\Local\\Temp\\5bbjfhwk..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,136 +153,443 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAmwHIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-04-21T23:06:15.552Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-21T23:39:39.108Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-21T22:59:16.137Z",
+              "Title": "SQLQuery2.sql ",
+              "DocumentMoniker": "C:\\Users\\marco\\AppData\\Local\\Temp\\5bbjfhwk..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\5bbjfhwk..sql",
+              "ToolTip": "SQLQuery2.sql ",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-04-29T01:10:41.764Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-20T01:17:35.791Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAswB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T01:17:27.95Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T01:06:26.567Z",
+              "WhenOpened": "2025-04-22T22:29:38.882Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Login.cshtml",
-              "RelativeToolTip": "Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-20T01:04:44.733Z"
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAMwBQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:47:00.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "One Vision.csproj",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\One Vision.csproj",
-              "RelativeDocumentMoniker": "One Vision.csproj",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\One Vision.csproj",
-              "RelativeToolTip": "One Vision.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-20T01:00:42.673Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Account\\Index.cshtml",
-              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Index.cshtml",
-              "RelativeToolTip": "Views\\Account\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-20T01:03:18.897Z",
+              "Title": "Inventario.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\Inventario.cs",
+              "RelativeDocumentMoniker": "Controllers\\Inventario.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\Inventario.cs",
+              "RelativeToolTip": "Controllers\\Inventario.cs",
+              "ViewState": "AgIAAEoAAACA9v1lFIQcwD4AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:42:43.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "PuntoVentaController.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\PuntoVentaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PuntoVentaController.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\PuntoVentaController.cs",
+              "RelativeToolTip": "Controllers\\PuntoVentaController.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:35:25.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAADAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-29T00:04:55.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HistorialController.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HistorialController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HistorialController.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Controllers\\HistorialController.cs",
+              "RelativeToolTip": "Controllers\\HistorialController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAADgv0EAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:43:15.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T00:59:44.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OneVisionDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\OneVisionDbContext.cs",
+              "RelativeDocumentMoniker": "Models\\OneVisionDbContext.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\OneVisionDbContext.cs",
+              "RelativeToolTip": "Models\\OneVisionDbContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAIwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-28T23:55:23.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Producto.cs",
+              "RelativeDocumentMoniker": "Models\\Producto.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Producto.cs",
+              "RelativeToolTip": "Models\\Producto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:30:27.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Paciente.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Paciente.cs",
+              "RelativeDocumentMoniker": "Models\\Paciente.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Paciente.cs",
+              "RelativeToolTip": "Models\\Paciente.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:30:21.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Index.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Index.cshtml",
+              "RelativeToolTip": "Views\\Account\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:44:35.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:46:10.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Examen.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Examen.cs",
+              "RelativeDocumentMoniker": "Models\\Examen.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Examen.cs",
+              "RelativeToolTip": "Models\\Examen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:30:16.525Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Historial\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Historial\\Edit.cshtml",
               "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Historial\\Edit.cshtml",
               "RelativeToolTip": "Views\\Historial\\Edit.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAMwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:32:19.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Historial\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Historial\\Index.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Historial\\Index.cshtml",
+              "RelativeToolTip": "Views\\Historial\\Index.cshtml",
+              "ViewState": "AgIAABMAAAAAAAAAAAASwB4AAABwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:32:21.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Inventario\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Inventario\\Create.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Inventario\\Create.cshtml",
+              "RelativeToolTip": "Views\\Inventario\\Create.cshtml",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAMwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:15:57.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Inventario\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Inventario\\Index.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Inventario\\Index.cshtml",
+              "RelativeToolTip": "Views\\Inventario\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-20T01:02:05.749Z",
+              "WhenOpened": "2025-04-29T00:16:05.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\PuntoVenta\\Create.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Create.cshtml",
+              "RelativeToolTip": "Views\\PuntoVenta\\Create.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:48:40.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\PuntoVenta\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Edit.cshtml",
+              "RelativeToolTip": "Views\\PuntoVenta\\Edit.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:34:23.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABcAAAAAAAAAAAAiwCgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:32:51.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:40:43.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "SQLQuery1.sql ",
+              "DocumentMoniker": "C:\\Users\\marco\\AppData\\Local\\Temp\\ybuf0is3..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\ybuf0is3..sql",
+              "ToolTip": "SQLQuery1.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-04-29T00:55:06.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Historial.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Historial.cs",
+              "RelativeDocumentMoniker": "Models\\Historial.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\Historial.cs",
+              "RelativeToolTip": "Models\\Historial.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAAQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-28T23:38:16.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "20250429004209_Inicial.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Migrations\\20250429004209_Inicial.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250429004209_Inicial.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Migrations\\20250429004209_Inicial.cs",
+              "RelativeToolTip": "Migrations\\20250429004209_Inicial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T00:42:13.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\PuntoVenta\\Index.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\PuntoVenta\\Index.cshtml",
+              "RelativeToolTip": "Views\\PuntoVenta\\Index.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAASwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:49:15.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Vision.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Vision.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Vision.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Vision.cshtml",
+              "RelativeToolTip": "Views\\Home\\Vision.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:47:25.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T22:47:34.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:35:23.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:35:21.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-29T00:35:20.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T00:04:38.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "OneVision.ico - Icon [256x256, 32 bits, PNG]",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Imagenes\\OneVision.ico",
+              "RelativeDocumentMoniker": "Imagenes\\OneVision.ico",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Imagenes\\OneVision.ico - Icon [256x256, 32 bits, PNG]",
+              "RelativeToolTip": "Imagenes\\OneVision.ico - Icon [256x256, 32 bits, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001525|",
+              "WhenOpened": "2025-04-23T20:13:38.496Z",
+              "EditorCaption": " - Icon [256x256, 32 bits, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PacienteProductoViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\PacienteProductoViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\PacienteProductoViewModel.cs",
+              "ToolTip": "C:\\Users\\marco\\OneDrive\\Escritorio\\One Vision\\Models\\PacienteProductoViewModel.cs",
+              "RelativeToolTip": "Models\\PacienteProductoViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T22:30:25.176Z",
               "EditorCaption": ""
             }
           ]

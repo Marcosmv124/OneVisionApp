@@ -10,9 +10,9 @@ namespace One_Vision.Controllers
         {
             return new List<Paciente>
             {
-              new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
-              new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 0987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
-              new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
+              //new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
+              //new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 0987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
+              //new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
            };
         }
         // Esto es para pacientes
@@ -41,7 +41,7 @@ namespace One_Vision.Controllers
                 var nuevoPaciente = JsonSerializer.Deserialize<Paciente>(json);
                 if (nuevoPaciente != null)
                 {
-                    nuevoPaciente.Id = pacientes.Max(p => p.Id) + 1;
+                    //nuevoPaciente.Id = pacientes.Max(p => p.Id) + 1;
                     pacientes.Add(nuevoPaciente);
                 }
             }
@@ -52,18 +52,18 @@ namespace One_Vision.Controllers
         {
             var pacientes = new List<Paciente>
             {
-              new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
-              new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
-              new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
+              //new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
+              //new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
+              //new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
            };
 
-            var paciente = pacientes.FirstOrDefault(p => p.Id == id);
-            if (paciente == null)
-            {
-                return NotFound();
-            }
+            //var paciente = pacientes.FirstOrDefault(p => p.Id == id);
+            //if (paciente == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(paciente);
+            return View();
         }
         [HttpPost]
         public IActionResult Edit(Paciente paciente)

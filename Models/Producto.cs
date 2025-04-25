@@ -1,22 +1,46 @@
-﻿namespace One_Vision.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace One_Vision.Models
 {
     public class Producto
     {
-        public  int  ID_Producto { get;  set; }
-        public string Nombre_Producto { get; set; } 
-        public int Precio { get; set; }
-        public string Descripción_Producto { get; set; }
+        [Key]
+        public int CodigoDeBarra { get; set; }
 
-       public string Código { get; set;  }
-       public string Nombre { get; set; }
-       public int  Precio_Venta { get; set; }
-       public int Precio_Compra { get; set;  }
-       public string Categoria { get; set; }
-       public string Proveedor { get; set;  }
-       public string  Moda { get; set;  }
-       public string  Diseño { get; set; }
-       public string Color { get; set;  }
-       public string Fecha { get; set;  }
+        [Required]
+        [StringLength(100)]
+        public string Nombre { get; set; }
 
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal PrecioDeVenta { get; set; }
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal PrecioDeCompra { get; set; }
+
+        [Required]
+        public int Existencia { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Categoria { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Proveedor { get; set; }
+
+        [StringLength(50)]
+        public string Moda { get; set; }
+
+        [StringLength(50)]
+        public string Diseño { get; set; }
+
+        [StringLength(50)]
+        public string Color { get; set; }
+
+        [Required]
+        public DateTime Fecha { get; set; }
     }
 }

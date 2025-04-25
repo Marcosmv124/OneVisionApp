@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("One Vision")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea2535dfc070778b38a4d63f77a8e06fd240eb6d")]
 [assembly: System.Reflection.AssemblyProductAttribute("One Vision")]
 [assembly: System.Reflection.AssemblyTitleAttribute("One Vision")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

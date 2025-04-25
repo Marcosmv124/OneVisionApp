@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using One_Vision.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configurar DbContext
+builder.Services.AddDbContext<OneVisionDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
