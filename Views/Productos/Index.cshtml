@@ -1,0 +1,89 @@
+﻿@model IEnumerable<One_Vision.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioDeVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioDeCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Existencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Moda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diseño)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioDeVenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioDeCompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Existencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Moda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diseño)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CodigoDeBarra">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CodigoDeBarra">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CodigoDeBarra">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

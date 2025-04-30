@@ -1,98 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using One_Vision.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using One_Vision.Models;
 
 namespace One_Vision.Controllers
 {
-    public class PuntoVentaController : Controller
+    public class ProductosController : Controller
     {
-
         private readonly OneVisionDbContext _context;
 
-        public PuntoVentaController(OneVisionDbContext context)
+        public ProductosController(OneVisionDbContext context)
         {
             _context = context;
         }
-        [Authorize]
-        public IActionResult Index()
-        {
-            var viewModel = new PacienteProductoViewModel
-            {
-                Pacientes = _context.Pacientes.ToList(),
-                Productos = _context.Productos.ToList()
-            };
 
-            return View(viewModel);
+        // GET: Productos
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Productos.ToListAsync());
         }
-        [Authorize]
-        // GET: Pacientes/Details/5
-        public async Task<IActionResult> Details(string id)
+
+        // GET: Productos/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (paciente == null)
+            var producto = await _context.Productos
+                .FirstOrDefaultAsync(m => m.CodigoDeBarra == id);
+            if (producto == null)
             {
                 return NotFound();
             }
 
-            return View(paciente);
+            return View(producto);
         }
 
-        // GET: Pacientes/Create
+        // GET: Productos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Pacientes/Create
+        // POST: Productos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
+        public async Task<IActionResult> Create([Bind("CodigoDeBarra,Nombre,PrecioDeVenta,PrecioDeCompra,Existencia,Categoria,Proveedor,Moda,Diseño,Color,Fecha")] Producto producto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(paciente);
+                _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(paciente);
+            return View(producto);
         }
-        [Authorize]
-        // GET: Pacientes/Edit/5
-        public async Task<IActionResult> Edit(string id)
+
+        // GET: Productos/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes.FindAsync(id);
-            if (paciente == null)
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
             {
                 return NotFound();
             }
-            return View(paciente);
+            return View(producto);
         }
-        [Authorize]
-        // POST: Pacientes/Edit/5
+
+        // POST: Productos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
+        public async Task<IActionResult> Edit(int id, [Bind("CodigoDeBarra,Nombre,PrecioDeVenta,PrecioDeCompra,Existencia,Categoria,Proveedor,Moda,Diseño,Color,Fecha")] Producto producto)
         {
-            if (id != paciente.ID)
+            if (id != producto.CodigoDeBarra)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace One_Vision.Controllers
             {
                 try
                 {
-                    _context.Update(paciente);
+                    _context.Update(producto);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PacienteExists(paciente.ID))
+                    if (!ProductoExists(producto.CodigoDeBarra))
                     {
                         return NotFound();
                     }
@@ -117,45 +112,45 @@ namespace One_Vision.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(paciente);
+            return View(producto);
         }
-        [Authorize]
-        // GET: Pacientes/Delete/5
-        public async Task<IActionResult> Delete(string id)
+
+        // GET: Productos/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Pacientes
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (paciente == null)
+            var producto = await _context.Productos
+                .FirstOrDefaultAsync(m => m.CodigoDeBarra == id);
+            if (producto == null)
             {
                 return NotFound();
             }
 
-            return View(paciente);
+            return View(producto);
         }
-        [Authorize]
-        // POST: Pacientes/Delete/5
+
+        // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paciente = await _context.Pacientes.FindAsync(id);
-            if (paciente != null)
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto != null)
             {
-                _context.Pacientes.Remove(paciente);
+                _context.Productos.Remove(producto);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PacienteExists(string id)
+        private bool ProductoExists(int id)
         {
-            return _context.Pacientes.Any(e => e.ID == id);
+            return _context.Productos.Any(e => e.CodigoDeBarra == id);
         }
     }
 }

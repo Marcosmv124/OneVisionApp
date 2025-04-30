@@ -1,50 +1,72 @@
-﻿@* @model IEnumerable<One_Vision.Models.Producto> *@
+﻿@model IEnumerable<One_Vision.Models.Producto>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Inventario";
 }
 
-<h1>Inventario</h1>
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1 class="display-6"><i class="bi bi-boxes me-2"></i>Inventario de Productos</h1>
+    </div>
 
-<p>
-    <a asp-action="Create" class="btn btn-sm btn-info me-1 text-white">Agregar nuevo paciente</a>
-</p>
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-info text-white">
+            <i class="bi bi-plus-circle-fill me-1"></i>Agregar nuevo producto
+        </a>
+    </div>
 
-<table class="table table-bordered table-striped text-center align-middle">
-    <thead class="table-dark text-center">
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>PrecioVenta</th>
-            <th>PrecioCompra</th>
-            <th>Categoria</th>
-            <th>Proveedor</th>
-            <th>Moda</th>
-            <th>Diseño</th>
-            <th>Color</th>
-            <th>Fecha</th>
-        </tr>
-    </thead>
-    <tbody>
-@*         @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Código</td>
-                <td>@item.Nombre</td>
-                <td>@item.Precio_Venta</td>
-                <td>@item.Precio_Compra</td>
-                <td>@item.Categoria</td>
-                <td>@item.Proveedor</td>
-                <td>@item.Moda</td>
-                <td>@item.Diseño</td>
-                <td>@item.Color</td>
-                <td>@item.Fecha</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Código" class="btn btn-sm btn-warning me-1">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Código" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
-                    <a asp-action="Delete" asp-route-id="@item.Código" class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
-            </tr>
-        } *@
-    </tbody>
-</table>
-
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0"><i class="bi bi-clipboard-data-fill me-2"></i>Lista de Productos</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0 align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio Venta</th>
+                        <th>Precio Compra</th>
+                        <th>Existencia</th>
+                        <th>Categoría</th>
+                        <th>Proveedor</th>
+                        <th>Moda</th>
+                        <th>Diseño</th>
+                        <th>Color</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CodigoDeBarra</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.PrecioDeVenta.ToString("C")</td>
+                            <td>@item.PrecioDeCompra.ToString("C")</td>
+                            <td>@item.Existencia</td>
+                            <td>@item.Categoria</td>
+                            <td>@item.Proveedor</td>
+                            <td>@item.Moda</td>
+                            <td>@item.Diseño</td>
+                            <td>@item.Color</td>
+                            <td>@item.Fecha.ToShortDateString()</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-warning me-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-info text-white me-1">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

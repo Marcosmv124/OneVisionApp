@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,15 @@ builder.Services.AddControllersWithViews();
 // Configurar DbContext
 builder.Services.AddDbContext<OneVisionDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configuración de la autenticación basada en cookies
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Usuarios/Index";  // Ruta al login
+        options.LogoutPath = "/Usuarios/Logout";  // Ruta al logout
+        options.AccessDeniedPath = "/Home/AccessDenied";  // Ruta si el usuario no tiene acceso
+    });
 
 var app = builder.Build();
 
@@ -23,6 +33,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// Usar autenticación y autorización  
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
