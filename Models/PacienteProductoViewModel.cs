@@ -1,9 +1,11 @@
-﻿namespace One_Vision.Models
+﻿using One_Vision.Utils;
+
+namespace One_Vision.Models
 {
     public class PacienteProductoViewModel
     {
-        public IEnumerable<Paciente> Pacientes { get; set; }
-        public IEnumerable<Producto> Productos { get; set; }
-    
+        public Paginacion<Paciente> Pacientes { get; set; }
+        public Paginacion<Producto> Productos { get; set; }
+
     }
 }

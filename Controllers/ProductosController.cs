@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace One_Vision.Controllers
 {
@@ -17,7 +18,7 @@ namespace One_Vision.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: Productos
         public async Task<IActionResult> Index()
         {

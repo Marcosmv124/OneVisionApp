@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using One_Vision.Utils;
 
 namespace One_Vision.Controllers
 {
@@ -18,16 +19,36 @@ namespace One_Vision.Controllers
             _context = context;
         }
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
         {
+            int tamanioPagina = 5;
+            var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
+            var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
+
             var viewModel = new PacienteProductoViewModel
             {
-                Pacientes = _context.Pacientes.ToList(),
-                Productos = _context.Productos.ToList()
+                //Pacientes = _context.Pacientes.ToList(),
+                //Productos = _context.Productos.ToList()
+                Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
+                Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
             };
 
             return View(viewModel);
         }
+        //[Authorize]
+        //public IActionResult Index()
+
+        //{ 
+        //        var viewModel = new PacienteProductoViewModel
+        //        {
+        //            Pacientes = _context.Pacientes.ToList(),
+        //            Productos = _context.Productos.ToList()
+        //        };
+
+        //        return View(viewModel);
+
+        //}
+
         [Authorize]
         // GET: Pacientes/Details/5
         public async Task<IActionResult> Details(string id)
