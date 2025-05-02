@@ -104,22 +104,22 @@ namespace One_Vision.Controllers
         }
 
         // MÉTODO TEMPORAL PARA HASHEAR CONTRASEÑAS YA REGISTRADAS
-        public IActionResult HashPasswords()
-        {
-            var usuarios = _context.Usuarios.ToList();
+        //public IActionResult HashPasswords()
+        //{
+        //    var usuarios = _context.Usuarios.ToList();
 
-            foreach (var user in usuarios)
-            {
-                // Detectamos si la contraseña aún no está hasheada (ej. por longitud o patrón)
-                if (user.Password.Length < 60) // Los hashes usualmente son más largos
-                {
-                    user.Password = _passwordHasher.HashPassword(user, user.Password);
-                }
-            }
+        //    foreach (var user in usuarios)
+        //    {
+        //        // Detectamos si la contraseña aún no está hasheada (ej. por longitud o patrón)
+        //        if (user.Password.Length < 60) // Los hashes usualmente son más largos
+        //        {
+        //            user.Password = _passwordHasher.HashPassword(user, user.Password);
+        //        }
+        //    }
 
-            _context.SaveChanges();
-            return Content("Contraseñas actualizadas correctamente.");
-        }
+        //    _context.SaveChanges();
+        //    return Content("Contraseñas actualizadas correctamente.");
+        //}
     }
 }
 
