@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
+using One_Vision.Utils;
 
 namespace One_Vision.Controllers
 {
@@ -18,10 +19,13 @@ namespace One_Vision.Controllers
         // GET: Inventario
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1)
         {
-            var productos = _context.Productos.ToList(); // o donde obtengas los datos
-            return View(productos);
+            int tamanioPagina = 5;
+           // var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
+            var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
+            var productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina);
+            return View(productos); // ✔️ este es del tipo correcto
         }
         [Authorize]
         // GET: Inventario/Details/5

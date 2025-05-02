@@ -1,10 +1,10 @@
-﻿@model IEnumerable<One_Vision.Models.Producto>
+﻿@model One_Vision.Utils.Paginacion<One_Vision.Models.Producto>
 
 @{
     ViewData["Title"] = "Inventario";
 }
 
-<div class="container mt-4">
+<div id="productos-container">
     <div class="text-center mb-4">
         <h1 class="display-6"><i class="bi bi-boxes me-2"></i>Inventario de Productos</h1>
     </div>
@@ -16,6 +16,30 @@
     </div>
 
     <div class="card shadow-sm border-0">
+        <nav class="mt-3">
+            <ul class="pagination justify-content-center">
+                @if (Model.TienePaginaAnterior)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?paginaProductos=@(Model.PaginaActual - 1)">Anterior</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Model.TotalPaginas; i++)
+                {
+                    <li class="page-item @(i == Model.PaginaActual ? "active" : "")">
+                        <a class="page-link" href="?paginaProductos=@i">@i</a>
+                    </li>
+                }
+
+                @if (Model.TienePaginaSiguiente)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?paginaProductos=@(Model.PaginaActual + 1)">Siguiente</a>
+                    </li>
+                }
+            </ul>
+        </nav>
         <div class="card-header bg-dark text-white">
             <h5 class="mb-0"><i class="bi bi-clipboard-data-fill me-2"></i>Lista de Productos</h5>
         </div>
@@ -38,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td>@item.CodigoDeBarra</td>
@@ -70,3 +94,15 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // AJAX para paginación de productos
+        $(document).on("click", "#productos-container .pagination a", function (e) {
+            e.preventDefault();
+            const url = $(this).attr("href");
+            $("#productos-container").load(url + " #productos-container > *");
+        });
+    </script>
+}
