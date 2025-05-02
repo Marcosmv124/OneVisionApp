@@ -9,12 +9,16 @@ using One_Vision.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace One_Vision.Controllers
 {
     public class UsuariosController : Controller
     {
         private readonly OneVisionDbContext _context;
+        private readonly PasswordHasher<Usuario> _passwordHasher = new PasswordHasher<Usuario>();
+
 
         public UsuariosController(OneVisionDbContext context)
         {
@@ -24,6 +28,11 @@ namespace One_Vision.Controllers
         // GET: Usuarios/Login
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -33,26 +42,28 @@ namespace One_Vision.Controllers
         public async Task<IActionResult> Index(Usuario usuario)
         {
             var user = _context.Usuarios.FirstOrDefault(u =>
-                u.UsuarioNombre == usuario.UsuarioNombre &&
-                u.Password == usuario.Password);
+                u.UsuarioNombre == usuario.UsuarioNombre /*&&
+                u.Password == usuario.Password*/);
 
             if (user != null)
             {
-                // Crear los claims
-                var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UsuarioNombre),
-                // Puedes agregar más claims como el rol del usuario, etc.
-            };
+                var result = _passwordHasher.VerifyHashedPassword(user, user.Password, usuario.Password);
+                if (result == PasswordVerificationResult.Success)
+                {
+                    var claims = new List<Claim>
+                    {
+                      new Claim(ClaimTypes.Name, user.UsuarioNombre),
+                      // Puedes agregar más claims como el rol del usuario, etc.
+                    };
+                    // Crear la identidad y la principal
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
 
-                // Crear la identidad y la principal
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
+                    // Iniciar sesión
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                // Iniciar sesión
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                return RedirectToAction("Index", "Home"); // Redirige al Home o a la página protegida
+                    return RedirectToAction("Index", "Home"); // Redirige al Home o a la página protegida
+                }
             }
 
             ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
@@ -62,6 +73,11 @@ namespace One_Vision.Controllers
         // GET: Usuarios/Create (Registro)
         public IActionResult Create()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -72,6 +88,7 @@ namespace One_Vision.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuario.Password = _passwordHasher.HashPassword(usuario, usuario.Password); 
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,5 +102,24 @@ namespace One_Vision.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
+
+        // MÉTODO TEMPORAL PARA HASHEAR CONTRASEÑAS YA REGISTRADAS
+        public IActionResult HashPasswords()
+        {
+            var usuarios = _context.Usuarios.ToList();
+
+            foreach (var user in usuarios)
+            {
+                // Detectamos si la contraseña aún no está hasheada (ej. por longitud o patrón)
+                if (user.Password.Length < 60) // Los hashes usualmente son más largos
+                {
+                    user.Password = _passwordHasher.HashPassword(user, user.Password);
+                }
+            }
+
+            _context.SaveChanges();
+            return Content("Contraseñas actualizadas correctamente.");
+        }
     }
 }
+
