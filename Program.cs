@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 //// Permitir conexiones desde cualquier IP (remoto)
-builder.WebHost.UseUrls("http://0.0.0.0:5000");
+//builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 // Agregar servicios MVC
 builder.Services.AddControllersWithViews();

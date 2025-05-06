@@ -1,7 +1,7 @@
 ﻿@model One_Vision.Models.PacienteProductoViewModel
 
 @{
-    ViewData["Title"] = "One Vision Optical Center"; 
+    ViewData["Title"] = "Punto de venta";
 }
 
 <div class="container mt-4">
@@ -15,16 +15,24 @@
         </a>
     </div>
 
-    <!-- Lista de Pacientes -->
-    <div class="card shadow-sm border-0 mb-5" id="pacientes-container">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Pacientes</h5>
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="bi bi-people-fill me-2"></i>Lista de Pacientes
+            </h5>
+            <div class="d-flex">
+                <input type="text" class="form-control form-control-sm me-2" placeholder="Buscar paciente..." />
+                <button class="btn btn-light btn-sm text-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
         </div>
+
         <div class="card-body p-0">
             <table class="table table-hover table-striped mb-0">
                 <thead class="table-light">
                     <tr>
-                        <th>Nombre</th>
+                        <th>Nombre Completo</th>
                         <th>Edad</th>
                         <th>Teléfono</th>
                         <th>Correo</th>
@@ -84,18 +92,29 @@
         </div>
     </div>
 
-    <!-- Registro de Productos -->
-    <div class="card shadow-sm border-0" id="productos-container">
-        <div class="card-header bg-secondary text-white">
-            <h5 class="mb-0"><i class="bi bi-box-seam me-2"></i>Registro de Productos</h5>
-        </div>
-        <div class="card-body p-0">
-            <table class="table table-hover table-striped mb-0">
-                <thead class="table-light">
+    <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
+        <!-- Registro de Productos -->
+        <div style="flex: 1;">
+            <div style="background-color: #444; color: white; padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <i class="fas fa-box"></i> Lista de Productos
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="form-control form-control-sm me-2" placeholder="Buscar producto..." style="border-radius: 8px;" />
+                        <button class="btn btn-light btn-sm text-primary">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <table style="width: 100%; border: 1px solid #ccc; border-top: none;">
+                <thead style="background-color: #f5f5f5;">
                     <tr>
-                        <th>Nombre del producto</th>
-                        <th>Precio</th>
-                        <th>Descripción</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Nombre del producto</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Precio</th>
+                        <th style="padding: 8px; border: 1px solid #ddd;">Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,8 +154,54 @@
                 </ul>
             </nav>
         </div>
+
+        <!-- Registro de Venta -->
+        <div style="flex: 1;">
+            <div style="background-color: #444; color: white; padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                <i class="fas fa-receipt"></i> Zona de Cobro
+            </div>
+            <div style="border: 1px solid #ccc; border-top: none; padding: 10px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" placeholder="Valor del dólar actual" style="flex: 1; padding: 5px; border-radius: 8px;">
+                    <label style="display: flex; align-items: center; gap: 5px; padding: 10px;">
+                        <input type="checkbox"> Anticipo en Dólar
+                    </label>
+                    <input type="text" placeholder="Anticipo" style="flex: 1; padding: 10px; border-radius: 8px;">
+                    <input type="text" placeholder="Anticipo abonado" style="flex: 1; padding: 10px; border-radius: 8px;">
+                    <input type="text" placeholder="Precio total de productos" style="flex: 1; padding: 10px; border-radius: 8px;">
+                    <input type="text" placeholder="Total restante" style="flex: 1; padding: 10px; border-radius: 8px;">
+                </div>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background-color: #f5f5f5;">
+                        <tr>
+                            <th style="padding: 8px; border: 1px solid #ddd;">ID_Venta</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">ID_Paciente</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Productos</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Venta</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Abonado</th>
+                            <th style="padding: 8px; border: 1px solid #ddd;">Adeudo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #ddd;">4567853214860</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">141124IZO</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">Uline Lentes con Filtro para Luz Azul</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">187</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">187</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>No Adeuda</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <button style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 3px;">Finalizar Venta</button>
+                    <button style="padding: 8px 12px; background-color: #6c757d; color: white; border: none; border-radius: 3px;">Generar Recibo</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
