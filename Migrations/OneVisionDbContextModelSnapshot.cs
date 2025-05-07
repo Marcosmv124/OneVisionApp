@@ -592,10 +592,7 @@ namespace One_Vision.Migrations
             modelBuilder.Entity("One_Vision.Models.Producto", b =>
                 {
                     b.Property<int>("CodigoDeBarra")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodigoDeBarra"));
 
                     b.Property<string>("Categoria")
                         .IsRequired()

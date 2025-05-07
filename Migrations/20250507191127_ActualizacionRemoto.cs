@@ -5,7 +5,7 @@
 namespace One_Vision.Migrations
 {
     /// <inheritdoc />
-    public partial class Local : Migration
+    public partial class ActualizacionRemoto : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

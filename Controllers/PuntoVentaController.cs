@@ -19,22 +19,59 @@ namespace One_Vision.Controllers
             _context = context;
         }
         [Authorize]
-        public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
+        //public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
+        //{
+        //    int tamanioPagina = 5;
+        //    var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
+        //    var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
+
+        //    var viewModel = new PacienteProductoViewModel
+        //    {
+        //        //Pacientes = _context.Pacientes.ToList(),
+        //        //Productos = _context.Productos.ToList()
+        //        Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
+        //        Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
+        //    };
+
+        //    return View(viewModel);
+        //}
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Index(string buscadorPacientes, string buscadorProductos, int paginaPacientes = 1, int paginaProductos = 1)
         {
             int tamanioPagina = 5;
-            var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
-            var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
+
+            // Filtrado de pacientes
+            var pacientesQuery = _context.Pacientes.AsQueryable();
+            if (!string.IsNullOrEmpty(buscadorPacientes))
+            {
+                pacientesQuery = pacientesQuery
+                    .Where(p => p.Nombre.Contains(buscadorPacientes));
+            }
+
+            pacientesQuery = pacientesQuery.OrderBy(p => p.ID);
+            var pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina);
+
+            // Filtrado de productos
+            var productosQuery = _context.Productos.AsQueryable();
+            if (!string.IsNullOrEmpty(buscadorProductos))
+            {
+                productosQuery = productosQuery
+                    .Where(p => p.Nombre.Contains(buscadorProductos) || p.CodigoDeBarra.ToString().Contains(buscadorProductos));
+            }
+
+            productosQuery = productosQuery.OrderBy(p => p.CodigoDeBarra);
+            var productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina);
 
             var viewModel = new PacienteProductoViewModel
             {
-                //Pacientes = _context.Pacientes.ToList(),
-                //Productos = _context.Productos.ToList()
-                Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
-                Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
+                Pacientes = pacientes,
+                Productos = productos
             };
 
-            return View(viewModel);
+            return View("Index", viewModel);
         }
+
         //[Authorize]
         //public IActionResult Index()
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//// Permitir conexiones desde cualquier IP (remoto)
+////// Permitir conexiones desde cualquier IP (remoto)
 //builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 // Agregar servicios MVC
@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OneVisionDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Autenticación con cookies
+// Autenticaciï¿½n con cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -40,7 +40,7 @@ Console.WriteLine($"Frontend Domain: {frontendDomain}");
 
 var app = builder.Build();
 
-// Configuración del pipeline HTTP
+// Configuraciï¿½n del pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -48,16 +48,17 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
 // Activar CORS
 app.UseCors("AllowAll");
 
-// Autenticación y autorización
+// Autenticaciï¿½n y autorizaciï¿½n
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Archivos estáticos + rutas MVC
+// Archivos estï¿½ticos + rutas MVC
 app.MapStaticAssets();
 
 app.MapControllerRoute(
@@ -65,5 +66,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-// Ejecutar la aplicación
+// Ejecutar la aplicaciï¿½n
 app.Run();

@@ -15,16 +15,16 @@
         </a>
     </div>
 
-    <div class="card shadow-sm border-0 mb-5">
+    <!-- Estado de paginación -->
+    <input type="hidden" id="paginaPacientesActual" value="@Model.Pacientes.PaginaActual" />
+    <input type="hidden" id="paginaProductosActual" value="@Model.Productos.PaginaActual" />
+
+    <!-- Pacientes -->
+    <div class="card shadow-sm border-0 mb-5" id="pacientes-container">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
-                <i class="bi bi-people-fill me-2"></i>Lista de Pacientes
-            </h5>
+            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Pacientes</h5>
             <div class="d-flex">
-                <input type="text" class="form-control form-control-sm me-2" placeholder="Buscar paciente..." />
-                <button class="btn btn-light btn-sm text-primary">
-                    <i class="bi bi-search"></i>
-                </button>
+                <input type="text" id="buscadorPacientes" class="form-control form-control-sm me-2" placeholder="Buscar paciente..." />
             </div>
         </div>
 
@@ -64,27 +64,28 @@
                     }
                 </tbody>
             </table>
-            <!-- Paginación de Pacientes -->
+
+            <!-- Paginación -->
             <nav class="mt-3">
                 <ul class="pagination justify-content-center">
                     @if (Model.Pacientes.TienePaginaAnterior)
                     {
                         <li class="page-item">
-                            <a class="page-link" href="?paginaPacientes=@(Model.Pacientes.PaginaActual - 1)&paginaProductos=@Model.Productos.PaginaActual">Anterior</a>
+                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual - 1)">Anterior</a>
                         </li>
                     }
 
                     @for (int i = 1; i <= Model.Pacientes.TotalPaginas; i++)
                     {
                         <li class="page-item @(i == Model.Pacientes.PaginaActual ? "active" : "")">
-                            <a class="page-link" href="?paginaPacientes=@i&paginaProductos=@Model.Productos.PaginaActual">@i</a>
+                            <a class="page-link" href="#" data-pagina="@i">@i</a>
                         </li>
                     }
 
                     @if (Model.Pacientes.TienePaginaSiguiente)
                     {
                         <li class="page-item">
-                            <a class="page-link" href="?paginaPacientes=@(Model.Pacientes.PaginaActual + 1)&paginaProductos=@Model.Productos.PaginaActual">Siguiente</a>
+                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual + 1)">Siguiente</a>
                         </li>
                     }
                 </ul>
@@ -92,75 +93,74 @@
         </div>
     </div>
 
-    <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <!-- Registro de Productos -->
-        <div style="flex: 1;">
-            <div style="background-color: #444; color: white; padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <i class="fas fa-box"></i> Lista de Productos
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <input type="text" class="form-control form-control-sm me-2" placeholder="Buscar producto..." style="border-radius: 8px;" />
-                        <button class="btn btn-light btn-sm text-primary">
-                            <i class="bi bi-search"></i>
-                        </button>
+    <!-- Layout de dos columnas -->
+    <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap;">
+        <!-- Productos -->
+        <div style="flex: 1;" id="productos-container">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-box me-2"></i>Lista de Productos</h5>
+                    <div class="d-flex">
+                        <input type="text" id="buscadorProductos" class="form-control form-control-sm me-2" placeholder="Buscar producto..." />
                     </div>
                 </div>
+
+                <div class="card-body p-0">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Nombre del producto</th>
+                                <th>Precio</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Productos.Items)
+                            {
+                                <tr>
+                                    <td>@item.Nombre</td>
+                                    <td>@item.PrecioDeVenta.ToString("C")</td>
+                                    <td>@item.Categoria - @item.Color - @item.Diseño</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <!-- Paginación -->
+                    <nav class="mt-3">
+                        <ul class="pagination justify-content-center">
+                            @if (Model.Productos.TienePaginaAnterior)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="#" data-pagina="@(@Model.Productos.PaginaActual - 1)">Anterior</a>
+                                </li>
+                            }
+
+                            @for (int i = 1; i <= Model.Productos.TotalPaginas; i++)
+                            {
+                                <li class="page-item @(i == Model.Productos.PaginaActual ? "active" : "")">
+                                    <a class="page-link" href="#" data-pagina="@i">@i</a>
+                                </li>
+                            }
+
+                            @if (Model.Productos.TienePaginaSiguiente)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="#" data-pagina="@(@Model.Productos.PaginaActual + 1)">Siguiente</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
             </div>
-
-            <table style="width: 100%; border: 1px solid #ccc; border-top: none;">
-                <thead style="background-color: #f5f5f5;">
-                    <tr>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Nombre del producto</th>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Precio</th>
-                        <th style="padding: 8px; border: 1px solid #ddd;">Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Productos.Items)
-                    {
-                        <tr>
-                            <td>@item.Nombre</td>
-                            <td>@item.PrecioDeVenta.ToString("C")</td>
-                            <td>@item.Categoria - @item.Color - @item.Diseño</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <!-- Paginación de Productos -->
-            <nav class="mt-3">
-                <ul class="pagination justify-content-center">
-                    @if (Model.Productos.TienePaginaAnterior)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="?paginaPacientes=@Model.Pacientes.PaginaActual&paginaProductos=@(Model.Productos.PaginaActual - 1)">Anterior</a>
-                        </li>
-                    }
-
-                    @for (int i = 1; i <= Model.Productos.TotalPaginas; i++)
-                    {
-                        <li class="page-item @(i == Model.Productos.PaginaActual ? "active" : "")">
-                            <a class="page-link" href="?paginaPacientes=@Model.Pacientes.PaginaActual&paginaProductos=@i">@i</a>
-                        </li>
-                    }
-
-                    @if (Model.Productos.TienePaginaSiguiente)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="?paginaPacientes=@Model.Pacientes.PaginaActual&paginaProductos=@(Model.Productos.PaginaActual + 1)">Siguiente</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
         </div>
 
-        <!-- Registro de Venta -->
+        <!-- Zona de cobro -->
         <div style="flex: 1;">
-            <div style="background-color: #444; color: white; padding: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+            <div style="background-color: #444; color: white; padding: 10px; border-radius: 5px 5px 0 0;">
                 <i class="fas fa-receipt"></i> Zona de Cobro
             </div>
-            <div style="border: 1px solid #ccc; border-top: none; padding: 10px;">
+            <div style="border: 1px solid #ccc; padding: 10px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
                     <input type="text" placeholder="Valor del dólar actual" style="flex: 1; padding: 5px; border-radius: 8px;">
                     <label style="display: flex; align-items: center; gap: 5px; padding: 10px;">
@@ -171,31 +171,31 @@
                     <input type="text" placeholder="Precio total de productos" style="flex: 1; padding: 10px; border-radius: 8px;">
                     <input type="text" placeholder="Total restante" style="flex: 1; padding: 10px; border-radius: 8px;">
                 </div>
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="background-color: #f5f5f5;">
+                <table class="table table-bordered table-sm">
+                    <thead class="table-light">
                         <tr>
-                            <th style="padding: 8px; border: 1px solid #ddd;">ID_Venta</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">ID_Paciente</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Productos</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Venta</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Abonado</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Adeudo</th>
+                            <th>ID_Venta</th>
+                            <th>ID_Paciente</th>
+                            <th>Productos</th>
+                            <th>Venta</th>
+                            <th>Abonado</th>
+                            <th>Adeudo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding: 8px; border: 1px solid #ddd;">4567853214860</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">141124IZO</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">Uline Lentes con Filtro para Luz Azul</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">187</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">187</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;"><strong>No Adeuda</strong></td>
+                            <td>4567853214860</td>
+                            <td>141124IZO</td>
+                            <td>Uline Lentes con Filtro para Luz Azul</td>
+                            <td>187</td>
+                            <td>187</td>
+                            <td><strong>No Adeuda</strong></td>
                         </tr>
                     </tbody>
                 </table>
-                <div style="margin-top: 10px; display: flex; gap: 10px;">
-                    <button style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 3px;">Finalizar Venta</button>
-                    <button style="padding: 8px 12px; background-color: #6c757d; color: white; border: none; border-radius: 3px;">Generar Recibo</button>
+                <div class="mt-3 d-flex gap-2">
+                    <button class="btn btn-primary">Finalizar Venta</button>
+                    <button class="btn btn-secondary">Generar Recibo</button>
                 </div>
             </div>
         </div>
@@ -204,20 +204,67 @@
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
-        // AJAX para paginación de pacientes
-        $(document).on("click", "#pacientes-container .pagination a", function (e) {
-            e.preventDefault();
-            const url = $(this).attr("href");
-            $("#pacientes-container").load(url + " #pacientes-container > *");
-        });
+        $(document).ready(function () {
+            let debounceTimer;
 
-        // AJAX para paginación de productos
-        $(document).on("click", "#productos-container .pagination a", function (e) {
-            e.preventDefault();
-            const url = $(this).attr("href");
-            $("#productos-container").load(url + " #productos-container > *");
+            function cargarPacientes(buscador = "", pagina = 1) {
+                const paginaProductos = $("#paginaProductosActual").val() || 1;
+                const url = `/PuntoVenta/Index?buscadorPacientes=${encodeURIComponent(buscador)}&paginaPacientes=${pagina}&paginaProductos=${paginaProductos}`;
+
+                const valorInput = $("#buscadorPacientes").val(); // 🔒 Guarda el texto
+
+                $("#pacientes-container").load(url + " #pacientes-container > *", function () {
+                    $("#paginaPacientesActual").val(pagina);
+                    $("#buscadorPacientes").val(valorInput); // 🔄 Restaura texto
+                    $("#buscadorPacientes").focus(); // Opcional
+                });
+            }
+
+            function cargarProductos(buscador = "", pagina = 1) {
+                const paginaPacientes = $("#paginaPacientesActual").val() || 1;
+                const url = `/PuntoVenta/Index?buscadorProductos=${encodeURIComponent(buscador)}&paginaProductos=${pagina}&paginaPacientes=${paginaPacientes}`;
+
+                const valorInput = $("#buscadorProductos").val();
+
+                $("#productos-container").load(url + " #productos-container > *", function () {
+                    $("#paginaProductosActual").val(pagina);
+                    $("#buscadorProductos").val(valorInput);
+                    $("#buscadorProductos").focus();
+                });
+            }
+
+            // ✅ Live search con debounce + input fijo
+            $(document).on("keyup", "#buscadorPacientes", function () {
+                clearTimeout(debounceTimer);
+                const valor = $(this).val();
+                debounceTimer = setTimeout(() => {
+                    cargarPacientes(valor, 1);
+                }, 300);
+            });
+
+            $(document).on("keyup", "#buscadorProductos", function () {
+                clearTimeout(debounceTimer);
+                const valor = $(this).val();
+                debounceTimer = setTimeout(() => {
+                    cargarProductos(valor, 1);
+                }, 300);
+            });
+
+            // ✅ Paginación con input persistente
+            $(document).on("click", "#pacientes-container .pagination a", function (e) {
+                e.preventDefault();
+                const pagina = $(this).data("pagina");
+                const buscador = $("#buscadorPacientes").val();
+                cargarPacientes(buscador, pagina);
+            });
+
+            $(document).on("click", "#productos-container .pagination a", function (e) {
+                e.preventDefault();
+                const pagina = $(this).data("pagina");
+                const buscador = $("#buscadorProductos").val();
+                cargarProductos(buscador, pagina);
+            });
         });
     </script>
 }

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
 
 namespace One_Vision.Controllers
 {
@@ -60,8 +54,12 @@ namespace One_Vision.Controllers
                     var principal = new ClaimsPrincipal(identity);
 
                     // Iniciar sesión
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
+                    //  await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = false
+                    };
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
                     return RedirectToAction("Index", "Home"); // Redirige al Home o a la página protegida
                 }
             }
@@ -120,6 +118,11 @@ namespace One_Vision.Controllers
         //    _context.SaveChanges();
         //    return Content("Contraseñas actualizadas correctamente.");
         //}
+
+        public IActionResult ConfigUsuario()
+        {
+            return View(); 
+        }
     }
 }
 

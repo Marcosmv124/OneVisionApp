@@ -6,6 +6,7 @@ namespace One_Vision.Models
     public class Producto
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CodigoDeBarra { get; set; }
 
         [Required]

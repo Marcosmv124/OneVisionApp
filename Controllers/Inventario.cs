@@ -43,17 +43,27 @@ namespace One_Vision.Controllers
         // POST: Inventario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpPost]
+        public async Task<IActionResult> Create(Producto producto)
         {
-            try
+            // Primero verificamos si el código ya existe en la base de datos
+            if (_context.Productos.Any(p => p.CodigoDeBarra == producto.CodigoDeBarra))
             {
+                ModelState.AddModelError("CodigoDeBarra", "Ya existe un producto con este código de barra.");
+            }
+
+            // Luego validamos el modelo completo
+            if (ModelState.IsValid)
+            {
+                _context.Add(producto);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            // Si hay errores, regresamos la vista con los mensajes
+            return View(producto);
         }
+
 
         // GET: Inventario/Edit/5
         public ActionResult Edit(int id)

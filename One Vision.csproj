@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\OneVision.ico" />
     <Content Remove="wwwroot\OneVision\Imagenes\OneVision.ico" />
   </ItemGroup>
 
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\OneVision.ico" />
     <None Include="wwwroot\OneVision\Imagenes\OneVision.ico" />
   </ItemGroup>
 

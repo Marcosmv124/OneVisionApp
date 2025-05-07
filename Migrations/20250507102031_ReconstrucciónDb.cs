@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace One_Vision.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class ReconstrucciónDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -147,8 +147,7 @@ namespace One_Vision.Migrations
                 name: "Productos",
                 columns: table => new
                 {
-                    CodigoDeBarra = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoDeBarra = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PrecioDeVenta = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrecioDeCompra = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -164,6 +163,23 @@ namespace One_Vision.Migrations
                 {
                     table.PrimaryKey("PK_Productos", x => x.CodigoDeBarra);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UsuarioNombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Rango = table.Column<int>(type: "int", nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.ID);
+                });
         }
 
         /// <inheritdoc />
@@ -177,6 +193,9 @@ namespace One_Vision.Migrations
 
             migrationBuilder.DropTable(
                 name: "Productos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

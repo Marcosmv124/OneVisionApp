@@ -12,8 +12,8 @@ using One_Vision.Models;
 namespace One_Vision.Migrations
 {
     [DbContext(typeof(OneVisionDbContext))]
-    [Migration("20250429231204_Local")]
-    partial class Local
+    [Migration("20250507102031_ReconstrucciónDb")]
+    partial class ReconstrucciónDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -595,10 +595,7 @@ namespace One_Vision.Migrations
             modelBuilder.Entity("One_Vision.Models.Producto", b =>
                 {
                     b.Property<int>("CodigoDeBarra")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodigoDeBarra"));
 
                     b.Property<string>("Categoria")
                         .IsRequired()
