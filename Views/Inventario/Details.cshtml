@@ -1,0 +1,52 @@
+﻿@model One_Vision.Models.Producto
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-3 text-primary">
+        <i class="bi bi-box-seam me-2"></i> Detalles del producto
+    </h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3">Precio de Venta</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.PrecioDeVenta)</dd>
+
+        <dt class="col-sm-3">Precio de Compra</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.PrecioDeCompra)</dd>
+
+        <dt class="col-sm-3">Existencia</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Existencia)</dd>
+
+        <dt class="col-sm-3">Categoría</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Categoria)</dd>
+
+        <dt class="col-sm-3">Proveedor</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Proveedor)</dd>
+
+        <dt class="col-sm-3">Moda</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Moda)</dd>
+
+        <dt class="col-sm-3">Diseño</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Diseño)</dd>
+
+        <dt class="col-sm-3">Color</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Color)</dd>
+
+        <dt class="col-sm-3">Fecha</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Fecha)</dd>
+    </dl>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model?.CodigoDeBarra" class="btn btn-primary">
+            <i class="bi bi-pencil-fill"></i> Editar
+        </a>
+    </div>
+</div>

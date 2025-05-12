@@ -1,0 +1,42 @@
+﻿@model One_Vision.Models.Paciente
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-3 text-danger">
+        <i class="bi bi-trash3-fill me-2"></i> ¿Estás seguro que deseas eliminar este paciente?
+    </h2>
+
+    <div class="mb-4">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+            <dt class="col-sm-3">Edad</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Edad)</dd>
+
+            <dt class="col-sm-3">Teléfono</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+
+            <dt class="col-sm-3">Correo</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Correo)</dd>
+
+            <dt class="col-sm-3">Dirección</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Direccion)</dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" class="d-flex justify-content-between align-items-center">
+        <input type="hidden" asp-for="ID" />
+
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Cancelar
+        </a>
+
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash3-fill me-1"></i> Eliminar
+        </button>
+    </form>
+</div>

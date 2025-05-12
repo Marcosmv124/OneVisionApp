@@ -1,0 +1,85 @@
+﻿@model One_Vision.Models.Producto
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4 text-primary">
+        <i class="bi bi-pencil-square me-2"></i> Editar Producto
+    </h2>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="CodigoDeBarra" />
+
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PrecioDeVenta" class="form-label"></label>
+            <input asp-for="PrecioDeVenta" class="form-control" />
+            <span asp-validation-for="PrecioDeVenta" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PrecioDeCompra" class="form-label"></label>
+            <input asp-for="PrecioDeCompra" class="form-control" />
+            <span asp-validation-for="PrecioDeCompra" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Existencia" class="form-label"></label>
+            <input asp-for="Existencia" class="form-control" />
+            <span asp-validation-for="Existencia" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Categoria" class="form-label"></label>
+            <input asp-for="Categoria" class="form-control" />
+            <span asp-validation-for="Categoria" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Proveedor" class="form-label"></label>
+            <input asp-for="Proveedor" class="form-control" />
+            <span asp-validation-for="Proveedor" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Moda" class="form-label"></label>
+            <input asp-for="Moda" class="form-control" />
+            <span asp-validation-for="Moda" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Diseño" class="form-label"></label>
+            <input asp-for="Diseño" class="form-control" />
+            <span asp-validation-for="Diseño" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Color" class="form-label"></label>
+            <input asp-for="Color" class="form-control" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Fecha" class="form-label"></label>
+            <input asp-for="Fecha" class="form-control" type="date" />
+            <span asp-validation-for="Fecha" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Cancelar
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save-fill"></i> Guardar cambios
+            </button>
+        </div>
+    </form>
+</div>

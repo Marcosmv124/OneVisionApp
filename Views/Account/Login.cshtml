@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="text-center">
+    <h1>Iniciar Sesion</h1>
+</div>
+
+<form asp-controller="Account" asp-action="Login" method="post" style="max-width: 300px; margin: auto;">
+    <div style="margin-bottom: 15px;">
+        <label for="usuario" style="display: block; font-weight: bold;">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required
+               style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="password" style="display: block; font-weight: bold;">Contraseña:</label>
+        <input type="password" id="password" name="password" required
+               style="width: 100%; padding: 8px; box-sizing: border-box;" />
+    </div>
+
+    <button type="submit" style="width: 100%; padding: 10px; font-weight: bold;">
+        Ingresar
+    </button>
+</form>
+
+
+@if (ViewBag.Error != null)
+{
+        <p style="color:red">@ViewBag.Error</p>
+}

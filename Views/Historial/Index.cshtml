@@ -1,0 +1,65 @@
+﻿@model One_Vision.Models.PacienteProductoViewModel
+@{
+    ViewData["Title"] = "Historial";
+}
+
+<h1>Historial</h1>
+
+<table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pacientes.Items)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Edad</td>
+                <td>@item.Telefono</td>
+                <td>@item.Correo</td>
+                <td>@item.Direccion</td>
+                <td>
+                   @*  <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a> *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Examen</h1>
+
+@* <table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Resultado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Examenes)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Fecha</td>
+                <td>@item.Resultados</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@

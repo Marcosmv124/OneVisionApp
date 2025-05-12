@@ -1,0 +1,142 @@
+/* Tamaño base de fuente */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Estilos para el body */
+body {
+    margin-bottom: 60px;
+    height: 100%;
+}
+
+/* Estilos de enfoque visual */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Placeholders flotantes */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* Layout principal */
+#wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar azul visible por defecto */
+#sidebar-wrapper {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0; /* Visible por defecto */
+    height: 100%;
+    background-color: #0d6efd; /* Azul */
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Ocultar sidebar cuando se active el modo toggled */
+#wrapper.toggled #sidebar-wrapper {
+    left: -250px;
+}
+
+/* Contenido principal */
+#page-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Si el sidebar está oculto, margin a 0 */
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 0;
+}
+
+/* Main ocupa todo el alto restante */
+main {
+    flex: 1;
+}
+
+/* Estilo para los enlaces del sidebar */
+#sidebar-wrapper .list-group-item {
+    background-color: transparent;
+    color: #fff;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    #sidebar-wrapper .list-group-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+
+/* Sidebar responsive en móviles */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        left: -250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        left: 0;
+    }
+
+    #page-content-wrapper {
+        margin-left: 0;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        margin-left: 0;
+    }
+    @media (max-width: 767.98px) {
+        #menu-toggle {
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            z-index: 1101;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            padding-left: 60px;
+        }
+
+        /* Si el sidebar está abierto, mover el botón y hacerlo transparente */
+        #wrapper.toggled #menu-toggle {
+            left: 260px;
+            background-color: transparent;
+            color: white;
+            box-shadow: none;
+        }
+    }
+
+}
