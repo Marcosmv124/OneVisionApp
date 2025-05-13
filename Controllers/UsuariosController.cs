@@ -122,8 +122,6 @@ namespace One_Vision.Controllers
             }
 
         }
-
-        // Logout
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
