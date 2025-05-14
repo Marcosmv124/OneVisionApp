@@ -14,7 +14,8 @@ namespace One_Vision.Models
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-
+        public DbSet<Venta>  Ventas {get; set; }
+        public DbSet<VentaProducto> VentaProductos {get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -29,7 +29,6 @@ public class EmailService
             <p>Hola {nombre},</p>
             <p>Gracias por registrarte. Confirma tu cuenta haciendo clic en el siguiente enlace:</p>
             <a href='{url}'>{url}</a>";
-
         var msg = MailHelper.CreateSingleEmail(from, to, asunto, "", html);
         await client.SendEmailAsync(msg);
     }

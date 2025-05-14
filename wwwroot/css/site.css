@@ -1,4 +1,4 @@
-/* Tamaño base de fuente */
+/* Tamaï¿½o base de fuente */
 html {
     font-size: 14px;
     position: relative;
@@ -73,7 +73,7 @@ body {
     transition: margin-left 0.3s ease-in-out;
 }
 
-/* Si el sidebar está oculto, margin a 0 */
+/* Si el sidebar estï¿½ oculto, margin a 0 */
 #wrapper.toggled #page-content-wrapper {
     margin-left: 0;
 }
@@ -95,7 +95,7 @@ main {
         color: #fff;
     }
 
-/* Sidebar responsive en móviles */
+/* Sidebar responsive en mï¿½viles */
 @media (max-width: 768px) {
     #sidebar-wrapper {
         left: -250px;
@@ -130,7 +130,7 @@ main {
             padding-left: 60px;
         }
 
-        /* Si el sidebar está abierto, mover el botón y hacerlo transparente */
+        /* Si el sidebar estï¿½ abierto, mover el botï¿½n y hacerlo transparente */
         #wrapper.toggled #menu-toggle {
             left: 260px;
             background-color: transparent;
@@ -138,5 +138,8 @@ main {
             box-shadow: none;
         }
     }
+}
 
+.fila-seleccionada {
+    background-color: blue !important; /* Gris claro */
 }
