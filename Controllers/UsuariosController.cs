@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text;
 using One_Vision.DTOs;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 
 namespace One_Vision.Controllers
 {
@@ -127,6 +128,11 @@ namespace One_Vision.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
+       [Authorize]
+        public IActionResult configUsuario(){
+        return View(); 
+        }
+
     }
 }
 
