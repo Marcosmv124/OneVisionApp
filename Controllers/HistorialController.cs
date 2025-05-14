@@ -1,108 +1,227 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
+using One_Vision.Utils;
 using System.Text.Json;
 
 namespace One_Vision.Controllers
 {
     public class HistorialController : Controller
     {
-        //public List<Paciente> ObtenerPacientesBase()
-        //{
-        //    return new List<Paciente>
-        //    {
-        //      //new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
-        //      //new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 0987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
-        //      //new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
-        //   };
-        //}
-        //// Esto es para pacientes
-        //public IActionResult Index()
-        //{
+        private readonly OneVisionDbContext _context;
 
-        //    var pacientes = ObtenerPacientesBase();
-        //    var examenes = ObtenerExamenesBase(); 
-        //    Add(pacientes);
-        //    AddExamen(examenes); 
-           
+        public HistorialController(OneVisionDbContext context)
+        {
+            _context = context;
+        }
+        [Authorize]
+        //public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
+        //{
+        //    int tamanioPagina = 5;
+        //    var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
+        //    var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
 
         //    var viewModel = new PacienteProductoViewModel
         //    {
-        //        Pacientes = pacientes,
-        //        Examenes = examenes
+        //        //Pacientes = _context.Pacientes.ToList(),
+        //        //Productos = _context.Productos.ToList()
+        //        Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
+        //        Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
         //    };
 
         //    return View(viewModel);
         //}
-        //public void Add(List<Paciente> pacientes)
-        //{
-        //    // Si hay un nuevo paciente en TempData, lo agregamos a la lista
-        //    if (TempData["NuevoPaciente"] is string json && !string.IsNullOrEmpty(json))
-        //    {
-        //        var nuevoPaciente = JsonSerializer.Deserialize<Paciente>(json);
-        //        if (nuevoPaciente != null)
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Index(string buscadorPacientes, string buscadorProductos, int paginaPacientes = 1, int paginaProductos = 1)
+        {
+            int tamanioPagina = 5;
+
+            // Filtrado de pacientes
+            var pacientesQuery = _context.Pacientes.AsQueryable();
+            if (!string.IsNullOrEmpty(buscadorPacientes))
+            {
+                pacientesQuery = pacientesQuery
+                    .Where(p => p.Nombre.Contains(buscadorPacientes));
+            }
+
+            pacientesQuery = pacientesQuery.OrderBy(p => p.ID);
+            var pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina);
+
+            // Filtrado de productos
+            var productosQuery = _context.Productos.AsQueryable();
+            if (!string.IsNullOrEmpty(buscadorProductos))
+            {
+                productosQuery = productosQuery
+                    .Where(p => p.Nombre.Contains(buscadorProductos) || p.CodigoDeBarra.ToString().Contains(buscadorProductos));
+            }
+
+            productosQuery = productosQuery.OrderBy(p => p.CodigoDeBarra);
+            var productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina);
+
+            var viewModel = new PacienteProductoViewModel
+            {
+                Pacientes = pacientes,
+                Productos = productos
+            };
+
+            return View("Index", viewModel);
+        }
+
+        //[Authorize]
+        //public IActionResult Index()
+
+        //{ 
+        //        var viewModel = new PacienteProductoViewModel
         //        {
-        //            //nuevoPaciente.Id = pacientes.Max(p => p.Id) + 1;
-        //            pacientes.Add(nuevoPaciente);
-        //        }
-        //    }
+        //            Pacientes = _context.Pacientes.ToList(),
+        //            Productos = _context.Productos.ToList()
+        //        };
+
+        //        return View(viewModel);
+
         //}
 
-        //[HttpGet]
-        //public IActionResult Edit(int id)
-        //{
-        //    var pacientes = new List<Paciente>
-        //    {
-        //      //new Paciente { Id = 1, Nombre = "Juan Pérez", Edad = 35, Telefono = 1234567890, Correo = "juan@example.com", Direccion = "Esperanza Iris" },
-        //      //new Paciente { Id = 2, Nombre = "Ana López", Edad = 28, Telefono = 987654321, Correo = "ana@example.com", Direccion = "Esperanza Iris" },
-        //      //new Paciente { Id = 3, Nombre = "Carlos Gómez", Edad = 40, Telefono = 555555555, Correo = "carlos@example.com", Direccion = "Esperanza Iris" }
-        //   };
+        [Authorize]
+        // GET: Pacientes/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    //var paciente = pacientes.FirstOrDefault(p => p.Id == id);
-        //    //if (paciente == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
+            var paciente = await _context.Pacientes
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (paciente == null)
+            {
+                return NotFound();
+            }
 
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(Paciente paciente)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Aquí iría la lógica de actualización real
-        //        TempData["Mensaje"] = $"Paciente {paciente.Nombre} editado correctamente.";
-        //        return RedirectToAction("Index");
-        //    }
+            return View(paciente);
+        }
 
-        //    return View(paciente); // Si hay errores, vuelve a mostrar el formulario
-        //}
+        // GET: Pacientes/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-        //////////////////////////////////////////////////////
+        // POST: Pacientes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(paciente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(paciente);
+        }
+        [Authorize]
+        // GET: Pacientes/Edit/5
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //////////////////////////////////////////////////////////////////////
-        ////Examen
-        //private List<Examen> ObtenerExamenesBase()
-        //{
-        //    return new List<Examen>
-        //    {
-        //      new Examen { Id = 1, Fecha = "Juan Pérez", Resultados = "Esperanza Iris"},
-        //      new Examen { Id = 2, Fecha = "Ana López",   Resultados = "Esperanza Iris"},
-        //      new Examen { Id = 3, Fecha = "Ana López",   Resultados = "Esperanza Iris"}
-        //   };
-        //}
-        //public void AddExamen(List<Examen> examenes)
-        //{
+            var paciente = await _context.Pacientes.FindAsync(id);
+            if (paciente == null)
+            {
+                return NotFound();
+            }
+            return View(paciente);
+        }
+        [Authorize]
+        // POST: Pacientes/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
+        {
+            if (id != paciente.ID)
+            {
+                return NotFound();
+            }
 
-        //    if (TempData["CrearExamen"] is string json && !string.IsNullOrEmpty(json))
-        //    {
-        //        var nuevoExamen = JsonSerializer.Deserialize<Examen>(json);
-        //        if (nuevoExamen != null)
-        //        {
-        //            nuevoExamen.Id = examenes.Max(p => p.Id) + 1;
-        //            examenes.Add(nuevoExamen);
-        //        }
-        //    }
-        //}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(paciente);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PacienteExists(paciente.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(paciente);
+        }
+        [Authorize]
+        // GET: Pacientes/Delete/5
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var paciente = await _context.Pacientes
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (paciente == null)
+            {
+                return NotFound();
+            }
+
+            return View(paciente);
+        }
+        [Authorize]
+        // POST: Pacientes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var paciente = await _context.Pacientes.FindAsync(id);
+            if (paciente != null)
+            {
+                _context.Pacientes.Remove(paciente);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool PacienteExists(string id)
+        {
+            return _context.Pacientes.Any(e => e.ID == id);
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateTest()
+        {
+            return View();
+        }
     }
 }

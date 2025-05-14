@@ -1,0 +1,527 @@
+﻿@model One_Vision.Models.Paciente
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<style>
+    .eye-area {
+        background-image: url('https://cdn-icons-png.flaticon.com/512/159/159604.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 100%;
+        height: 200px;
+        cursor: crosshair;
+        position: relative;
+    }
+
+    .marker-x {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+</style>
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4"><i class="bi bi-person-plus me-2"></i> Examen Óptico</h2>
+
+    <form asp-action="CreateTest">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <!-- Tabs de navegación -->
+        <ul class="nav nav-tabs mb-4" id="formTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pagina1-tab" data-bs-toggle="tab" data-bs-target="#pagina1" type="button" role="tab">Antecedentes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina2-tab" data-bs-toggle="tab" data-bs-target="#pagina2" type="button" role="tab">Agudeza Visual y Motilidad Ocular</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina3-tab" data-bs-toggle="tab" data-bs-target="#pagina3" type="button" role="tab">Prueba de Oclusión</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina4-tab" data-bs-toggle="tab" data-bs-target="#pagina4" type="button" role="tab">Retinoscopia</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="formTabsContent">
+            <div class="tab-pane fade show active" id="pagina1" role="tabpanel">
+                <!-- AQUÍ PEGAS la sección de Antecedentes familiar y personal -->
+                <!-- Sección Antecedentes -->
+                <h5 class="mt-4">Antecedentes</h5>
+                <div class="row g-4">
+                    <!-- Familiar -->
+                    <div class="col-md-6">
+                        <div class="border p-4 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3">Historia médica y ocular Familiar</h6>
+                            <div class="row row-cols-2">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="diabetesFamiliar">
+                                    <label class="form-check-label" for="diabetesFamiliar">Diabetes</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="hipertensionFamiliar">
+                                    <label class="form-check-label" for="hipertensionFamiliar">Hipertensión Arterial</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="alergiasFamiliar">
+                                    <label class="form-check-label" for="alergiasFamiliar">Alergias</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cataratasFamiliar">
+                                    <label class="form-check-label" for="cataratasFamiliar">Cataratas</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="glaucomaFamiliar">
+                                    <label class="form-check-label" for="glaucomaFamiliar">Glaucoma</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cegueraFamiliar">
+                                    <label class="form-check-label" for="cegueraFamiliar">Ceguera</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="tiroidesFamiliar">
+                                    <label class="form-check-label" for="tiroidesFamiliar">Tiroides</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="lentesFamiliar">
+                                    <label class="form-check-label" for="lentesFamiliar">Uso de lentes</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal -->
+                    <div class="col-md-6">
+                        <div class="border p-4 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3">Historia médica y ocular Personal</h6>
+                            <div class="row row-cols-2">
+                                <!-- 20 checkboxes o más -->
+                                @foreach (var item in new[] {
+                                ("irritacionOcular", "Irritación Ocular"),
+                                ("hipertensionArterial", "Hipertensión Arterial"),
+                                ("problemaTiroides", "Problemas con Tiroides"),
+                                ("golpeOjos", "Golpe en Ojos"),
+                                ("problemasCardiacos", "Problemas Cardiacos"),
+                                ("colesterol", "Colesterol"),
+                                ("problemasNerviosos", "Problemas Nerviosos"),
+                                ("lagrimeo", "Lagrimeo"),
+                                ("dolorCabeza", "Dolor de Cabeza"),
+                                ("moscasVolantes", "Moscas Volantes"),
+                                ("cansancioOcular", "Cansancio Ocular"),
+                                ("molestialuz", "Molestias con la Luz"),
+                                ("alergias", "Alergias"),
+                                ("cataratas", "Cataratas"),
+                                ("artritis", "Artritis"),
+                                ("glaucoma", "Glaucoma"),
+                                ("diabetes", "Diabetes"),
+                                ("lagana", "Lagaña"),
+                                ("comezon", "Comezón"),
+                                ("dolorOcular", "Dolor Ocular")
+                                })
+                                {
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="@item.Item1">
+                                        <label class="form-check-label" for="@item.Item1">@item.Item2</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sección de tarjetas adicionales -->
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Exámenes Complementarios</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Especificar exámenes..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Tiempo de uso / Hora de administración</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Ej. 8:00 am - 10:00 pm..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Fármaco / Toxicológico</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Especificar medicamentos o sustancias..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Síntomas / Motivo de consulta</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Motivo principal de la consulta..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pagina2" role="tabpanel">
+                <!-- Sección Agudeza Visual -->
+                <h5 class="mt-4">Agudeza Visual</h5>
+                <div class="row g-4">
+                    <!-- Sin corrección -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Sin corrección</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD L" /></div>
+                                <div><input class="form-control" placeholder="OD C" /></div>
+                                <div><input class="form-control" placeholder="OD PH" /></div>
+
+                                <div><input class="form-control" placeholder="OI L" /></div>
+                                <div><input class="form-control" placeholder="OI C" /></div>
+                                <div><input class="form-control" placeholder="OI PH" /></div>
+
+                                <div><input class="form-control" placeholder="AO L" /></div>
+                                <div><input class="form-control" placeholder="AO C" /></div>
+                                <div><input class="form-control" placeholder="AO PH" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Con corrección -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Con corrección</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD L" /></div>
+                                <div><input class="form-control" placeholder="OD C" /></div>
+                                <div></div>
+
+                                <div><input class="form-control" placeholder="OI L" /></div>
+                                <div><input class="form-control" placeholder="OI C" /></div>
+                                <div></div>
+
+                                <div><input class="form-control" placeholder="AO L" /></div>
+                                <div><input class="form-control" placeholder="AO C" /></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lensometría -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Lensometría</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD ESF" /></div>
+                                <div><input class="form-control" placeholder="OD CIL" /></div>
+                                <div><input class="form-control" placeholder="OD EJE" /></div>
+
+                                <div><input class="form-control" placeholder="OI ESF" /></div>
+                                <div><input class="form-control" placeholder="OI CIL" /></div>
+                                <div><input class="form-control" placeholder="OI EJE" /></div>
+
+                                <div class="col-4">
+                                    <input class="form-control" placeholder="ADD" />
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control" placeholder="DIP:" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nueva sección: Motilidad Ocular -->
+                <h5 class="mt-5">Motilidad Ocular</h5>
+                <div class="border p-4 rounded bg-white shadow-sm">
+                    <div class="row row-cols-3 g-3 text-center fw-semibold">
+                        <div><input class="form-control" placeholder="Reflejos Pupilares" /></div>
+                        <div><input class="form-control" placeholder="Ducciones" /></div>
+                        <div><input class="form-control" placeholder="Versiones AO" /></div>
+
+                        <div><input class="form-control" placeholder="Sacádicos de lectura" /></div>
+                        <div><input class="form-control" placeholder="Sacádicos de amplitud" /></div>
+                        <div><input class="form-control" placeholder="Seguimiento" /></div>
+                    </div>
+
+                    <div class="row row-cols-2 g-3 mt-3">
+                        <div><input class="form-control text-center" placeholder="OD" /></div>
+                        <div><input class="form-control text-center" placeholder="OI" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pagina3" role="tabpanel">
+                <div class="card shadow-sm border-0 p-3">
+                    <h5 class="mb-3">COVER TEST</h5>
+
+                    <!-- Sección Lejos -->
+                    <div class="border rounded p-3 mb-3 bg-light">
+                        <div class="row mb-2 fw-bold">
+                            <div class="col-12">Lejos</div>
+                        </div>
+                        <div class="row g-2 text-center">
+                            <div class="col-md">
+                                <label>Tipo</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="Vertical" />
+                            </div>
+                            <div class="col-md">
+                                <label>Magnitud</label>
+                                <input class="form-control mb-1" placeholder="DPh" />
+                                <input class="form-control" placeholder="DPh" />
+                            </div>
+                            <div class="col-md">
+                                <label>Dirección</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                            <div class="col-md">
+                                <label>Frecuencia</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                            <div class="col-md">
+                                <label>Lateralidad</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección Cerca -->
+                    <div class="border rounded p-3 mb-4 bg-light">
+                        <div class="row mb-2 fw-bold">
+                            <div class="col-12">Cerca</div>
+                        </div>
+                        <div class="row g-2 text-center">
+                            <div class="col-md">
+                                <label>Tipo</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="Vertical" />
+                            </div>
+                            <div class="col-md">
+                                <label>Magnitud</label>
+                                <input class="form-control mb-1" placeholder="DPh" />
+                                <input class="form-control" placeholder="DPh" />
+                            </div>
+                            <div class="col-md">
+                                <label>Dirección</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                            <div class="col-md">
+                                <label>Frecuencia</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                            <div class="col-md">
+                                <label>Lateralidad</label>
+                                <input class="form-control mb-1" placeholder="" />
+                                <input class="form-control" placeholder="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campos Visuales por Confrontación y Rejilla de Amsler -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card p-3 mb-3">
+                                <h6 class="fw-bold mb-2">Campos visuales por confrontación</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>OD</h6>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Escotoma</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Pérdida de campo visual</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Concéntricas</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Metamorfopsias</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Hemianopsias</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Cuadrantanopsias</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>OI</h6>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Escotoma</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Pérdida de campo visual</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Concéntricas</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Metamorfopsias</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Hemianopsias</div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox"> Cuadrantanopsias</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card p-3 mb-3">
+                                <h6 class="fw-bold mb-2">Rejilla de Amsler</h6>
+                                <div>
+                                    <h6>OD</h6>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"> Cuadrícula perpendicular y paralela</div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"> Punto central y uniforme</div>
+                                </div>
+                                <div class="mt-3">
+                                    <h6>OI</h6>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"> Cuadrícula perpendicular y paralela</div>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox"> Punto central y uniforme</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oftalmoscopia -->
+                    <div class="card p-3">
+                        <h6 class="fw-bold mb-2">OFTALMOSCOPIA</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>OD</h6>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Papila</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Fóvea</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Vasos</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Mácula</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Fondo de ojo</div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>OI</h6>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Papila</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Fóvea</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Vasos</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Mácula</div>
+                                <div class="form-check"><input class="form-check-input" type="checkbox"> Fondo de ojo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pagina4" role="tabpanel">
+                <div class="card shadow-sm border-0 p-3">
+                    <!-- Retinoscopía -->
+                    <h5 class="mb-3">Retinoscopía</h5>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md"><input class="form-control" placeholder="OD ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD AV" /></div>
+                        <div class="col-md-4" rowspan="2">
+                            <textarea class="form-control" rows="2" placeholder="Notas"></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-4">
+                        <div class="col-md"><input class="form-control" placeholder="OI ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI AV" /></div>
+                    </div>
+
+                    <!-- Subjetivos -->
+                    <h5 class="mb-3">Subjetivos</h5>
+
+                    <!-- Máximo positivo -->
+                    <h6 class="mb-2">Máximo positivo</h6>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md"><input class="form-control" placeholder="OD ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD AV" /></div>
+                        <div class="col-md-4" rowspan="2">
+                            <textarea class="form-control" rows="2" placeholder="Notas"></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-4">
+                        <div class="col-md"><input class="form-control" placeholder="OI ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI AV" /></div>
+                    </div>
+
+                    <!-- CCJ -->
+                    <h6 class="mb-2">CCJ</h6>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md"><input class="form-control" placeholder="OD ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OD AV" /></div>
+                        <div class="col-md-4" rowspan="2">
+                            <textarea class="form-control" rows="2" placeholder="Notas"></textarea>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-md"><input class="form-control" placeholder="OI ESF" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI CIL" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI EJE" /></div>
+                        <div class="col-md"><input class="form-control" placeholder="OI AV" /></div>
+                    </div>
+                </div>
+
+                <!-- Hallazgos -->
+                <div class="card shadow-sm border-0 p-3 mt-4">
+                    <h5 class="text-center mb-3">Hallazgos</h5>
+                    <div class="row text-center align-items-center justify-content-center">
+                        <!-- Ojo Derecho -->
+                        <div class="col-md-4">
+                            <label class="fw-bold mb-2">OJO Derecho</label>
+                            <div class="eye-area position-relative border rounded mx-auto mb-2" id="eyeRight"></div>
+                            <button class="btn btn-warning rounded-circle shadow-sm" onclick="clearMarkers('eyeRight')">
+                                <i class="bi bi-brush-fill"></i>
+                            </button>
+                        </div>
+
+                        <!-- Íconos centrales -->
+                        <div class="col-md-2 d-flex justify-content-center align-items-center gap-2">
+                            <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Ojo" width="40">
+                        </div>
+
+                        <!-- Ojo Izquierdo -->
+                        <div class="col-md-4">
+                            <label class="fw-bold mb-2">OJO Izquierdo</label>
+                            <div class="eye-area position-relative border rounded mx-auto mb-2" id="eyeLeft"></div>
+                            <button class="btn btn-warning rounded-circle shadow-sm" onclick="clearMarkers('eyeLeft')">
+                                <i class="bi bi-brush-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i> Guardar
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function addMarker(event, containerId) {
+        const container = document.getElementById(containerId);
+        const rect = container.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const marker = document.createElement('div');
+        marker.className = 'marker-x';
+        marker.style.left = `${x}px`;
+        marker.style.top = `${y}px`;
+        marker.innerText = 'X';
+
+        container.appendChild(marker);
+    }
+
+    function clearMarkers(containerId) {
+        const container = document.getElementById(containerId);
+        container.querySelectorAll('.marker-x').forEach(marker => marker.remove());
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('eyeRight').addEventListener('click', (e) => addMarker(e, 'eyeRight'));
+        document.getElementById('eyeLeft').addEventListener('click', (e) => addMarker(e, 'eyeLeft'));
+    });
+</script>
