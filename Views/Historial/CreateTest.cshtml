@@ -1,0 +1,265 @@
+﻿@model One_Vision.Models.Paciente
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4"><i class="bi bi-person-plus me-2"></i> Examen Óptico</h2>
+
+    <form asp-action="CreateTest">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <!-- Tabs de navegación -->
+        <ul class="nav nav-tabs mb-4" id="formTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pagina1-tab" data-bs-toggle="tab" data-bs-target="#pagina1" type="button" role="tab">Antecedentes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina2-tab" data-bs-toggle="tab" data-bs-target="#pagina2" type="button" role="tab">Agudeza Visual y Motilidad Ocular</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina3-tab" data-bs-toggle="tab" data-bs-target="#pagina3" type="button" role="tab">Prueba de Oclusión</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pagina4-tab" data-bs-toggle="tab" data-bs-target="#pagina4" type="button" role="tab">Página 4</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="formTabsContent">
+            <div class="tab-pane fade show active" id="pagina1" role="tabpanel">
+                <!-- AQUÍ PEGAS la sección de Antecedentes familiar y personal -->
+                <!-- Sección Antecedentes -->
+                <h5 class="mt-4">Antecedentes</h5>
+                <div class="row g-4">
+                    <!-- Familiar -->
+                    <div class="col-md-6">
+                        <div class="border p-4 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3">Historia médica y ocular Familiar</h6>
+                            <div class="row row-cols-2">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="diabetesFamiliar">
+                                    <label class="form-check-label" for="diabetesFamiliar">Diabetes</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="hipertensionFamiliar">
+                                    <label class="form-check-label" for="hipertensionFamiliar">Hipertensión Arterial</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="alergiasFamiliar">
+                                    <label class="form-check-label" for="alergiasFamiliar">Alergias</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cataratasFamiliar">
+                                    <label class="form-check-label" for="cataratasFamiliar">Cataratas</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="glaucomaFamiliar">
+                                    <label class="form-check-label" for="glaucomaFamiliar">Glaucoma</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="cegueraFamiliar">
+                                    <label class="form-check-label" for="cegueraFamiliar">Ceguera</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="tiroidesFamiliar">
+                                    <label class="form-check-label" for="tiroidesFamiliar">Tiroides</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="lentesFamiliar">
+                                    <label class="form-check-label" for="lentesFamiliar">Uso de lentes</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal -->
+                    <div class="col-md-6">
+                        <div class="border p-4 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3">Historia médica y ocular Personal</h6>
+                            <div class="row row-cols-2">
+                                <!-- 20 checkboxes o más -->
+                                @foreach (var item in new[] {
+                                ("irritacionOcular", "Irritación Ocular"),
+                                ("hipertensionArterial", "Hipertensión Arterial"),
+                                ("problemaTiroides", "Problemas con Tiroides"),
+                                ("golpeOjos", "Golpe en Ojos"),
+                                ("problemasCardiacos", "Problemas Cardiacos"),
+                                ("colesterol", "Colesterol"),
+                                ("problemasNerviosos", "Problemas Nerviosos"),
+                                ("lagrimeo", "Lagrimeo"),
+                                ("dolorCabeza", "Dolor de Cabeza"),
+                                ("moscasVolantes", "Moscas Volantes"),
+                                ("cansancioOcular", "Cansancio Ocular"),
+                                ("molestialuz", "Molestias con la Luz"),
+                                ("alergias", "Alergias"),
+                                ("cataratas", "Cataratas"),
+                                ("artritis", "Artritis"),
+                                ("glaucoma", "Glaucoma"),
+                                ("diabetes", "Diabetes"),
+                                ("lagana", "Lagaña"),
+                                ("comezon", "Comezón"),
+                                ("dolorOcular", "Dolor Ocular")
+                                })
+                                {
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="@item.Item1">
+                                        <label class="form-check-label" for="@item.Item1">@item.Item2</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sección de tarjetas adicionales -->
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Exámenes Complementarios</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Especificar exámenes..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Tiempo de uso / Hora de administración</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Ej. 8:00 am - 10:00 pm..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Fármaco / Toxicológico</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Especificar medicamentos o sustancias..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                            <strong>Síntomas / Motivo de consulta</strong>
+                            <hr>
+                            <textarea class="form-control" rows="4" placeholder="Motivo principal de la consulta..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pagina2" role="tabpanel">
+                <!-- Sección Agudeza Visual -->
+                <h5 class="mt-4">Agudeza Visual</h5>
+                <div class="row g-4">
+                    <!-- Sin corrección -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Sin corrección</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD L" /></div>
+                                <div><input class="form-control" placeholder="OD C" /></div>
+                                <div><input class="form-control" placeholder="OD PH" /></div>
+
+                                <div><input class="form-control" placeholder="OI L" /></div>
+                                <div><input class="form-control" placeholder="OI C" /></div>
+                                <div><input class="form-control" placeholder="OI PH" /></div>
+
+                                <div><input class="form-control" placeholder="AO L" /></div>
+                                <div><input class="form-control" placeholder="AO C" /></div>
+                                <div><input class="form-control" placeholder="AO PH" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Con corrección -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Con corrección</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD L" /></div>
+                                <div><input class="form-control" placeholder="OD C" /></div>
+                                <div></div>
+
+                                <div><input class="form-control" placeholder="OI L" /></div>
+                                <div><input class="form-control" placeholder="OI C" /></div>
+                                <div></div>
+
+                                <div><input class="form-control" placeholder="AO L" /></div>
+                                <div><input class="form-control" placeholder="AO C" /></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lensometría -->
+                    <div class="col-md-4">
+                        <div class="border p-3 rounded bg-white shadow-sm h-100">
+                            <h6 class="fw-bold mb-3 text-center">Lensometría</h6>
+                            <div class="row row-cols-3 g-2">
+                                <div><input class="form-control" placeholder="OD ESF" /></div>
+                                <div><input class="form-control" placeholder="OD CIL" /></div>
+                                <div><input class="form-control" placeholder="OD EJE" /></div>
+
+                                <div><input class="form-control" placeholder="OI ESF" /></div>
+                                <div><input class="form-control" placeholder="OI CIL" /></div>
+                                <div><input class="form-control" placeholder="OI EJE" /></div>
+
+                                <div class="col-4">
+                                    <input class="form-control" placeholder="ADD" />
+                                </div>
+                                <div class="col-8">
+                                    <input class="form-control" placeholder="DIP:" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nueva sección: Motilidad Ocular -->
+                <h5 class="mt-5">Motilidad Ocular</h5>
+                <div class="border p-4 rounded bg-white shadow-sm">
+                    <div class="row row-cols-3 g-3 text-center fw-semibold">
+                        <div><input class="form-control" placeholder="Reflejos Pupilares" /></div>
+                        <div><input class="form-control" placeholder="Ducciones" /></div>
+                        <div><input class="form-control" placeholder="Versiones AO" /></div>
+
+                        <div><input class="form-control" placeholder="Sacádicos de lectura" /></div>
+                        <div><input class="form-control" placeholder="Sacádicos de amplitud" /></div>
+                        <div><input class="form-control" placeholder="Seguimiento" /></div>
+                    </div>
+
+                    <div class="row row-cols-2 g-3 mt-3">
+                        <div><input class="form-control text-center" placeholder="OD" /></div>
+                        <div><input class="form-control text-center" placeholder="OI" /></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pagina3" role="tabpanel">
+                
+            </div>
+
+
+            <div class="tab-pane fade" id="pagina4" role="tabpanel">
+                <!-- Aquí puedes dejar observaciones, adjuntos, o un resumen final -->
+                <div class="alert alert-info">Completa todos los pasos antes de guardar.</div>
+            </div>
+        </div>
+
+
+        
+
+       
+
+
+        
+
+        <!-- Botones -->
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i> Guardar
+            </button>
+        </div>
+    </form>
+</div>

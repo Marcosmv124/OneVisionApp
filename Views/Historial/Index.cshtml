@@ -3,63 +3,163 @@
     ViewData["Title"] = "Historial";
 }
 
-<h1>Historial</h1>
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1 class="display-6"><i class="bi bi-file-medical"></i>Historial Clinico</h1>
+    </div>
 
-<table class="table table-bordered table-striped text-center align-middle">
-    <thead class="table-dark text-center">
-        <tr>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Direccion</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Pacientes.Items)
-        {
-            <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Edad</td>
-                <td>@item.Telefono</td>
-                <td>@item.Correo</td>
-                <td>@item.Direccion</td>
-                <td>
-                   @*  <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a> *@
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="d-flex justify-content-end gap-2 mb-3">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-person-plus-fill me-1"></i>Registrar Paciente
+        </a>
+        <a asp-action="CreateTest" class="btn btn-success">
+            <i class="bi bi-journal-text me-1"></i>Realizar Examen
+        </a>
+    </div>
 
-<h1>Examen</h1>
 
-@* <table class="table table-bordered table-striped text-center align-middle">
-    <thead class="table-dark text-center">
-        <tr>
-            <th>ID</th>
-            <th>Fecha</th>
-            <th>Resultado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Examenes)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Fecha</td>
-                <td>@item.Resultados</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-1 text-white">Detalles</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
- *@
+    <!-- Estado de paginación -->
+    <input type="hidden" id="paginaPacientesActual" value="@Model.Pacientes.PaginaActual" />
+    <input type="hidden" id="paginaProductosActual" value="@Model.Productos.PaginaActual" />
+
+    <!-- Pacientes -->
+    <div class="card shadow-sm border-0 mb-5" id="pacientes-container">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Pacientes</h5>
+            <div class="d-flex">
+                <input type="text" id="buscadorPacientes" class="form-control form-control-sm me-2" placeholder="Buscar paciente..." />
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Pacientes.Items)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.Edad</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.Correo</td>
+                            <td>@item.Direccion</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-warning me-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-info me-1 text-white">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Paginación -->
+            <nav class="mt-3">
+                <ul class="pagination justify-content-center">
+                    @if (Model.Pacientes.TienePaginaAnterior)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual - 1)">Anterior</a>
+                        </li>
+                    }
+
+                    @for (int i = 1; i <= Model.Pacientes.TotalPaginas; i++)
+                    {
+                        <li class="page-item @(i == Model.Pacientes.PaginaActual ? "active" : "")">
+                            <a class="page-link" href="#" data-pagina="@i">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.Pacientes.TienePaginaSiguiente)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual + 1)">Siguiente</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>   
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let debounceTimer;
+
+            function cargarPacientes(buscador = "", pagina = 1) {
+                const paginaProductos = $("#paginaProductosActual").val() || 1;
+                const url = `/PuntoVenta/Index?buscadorPacientes=${encodeURIComponent(buscador)}&paginaPacientes=${pagina}&paginaProductos=${paginaProductos}`;
+
+                const valorInput = $("#buscadorPacientes").val(); // 🔒 Guarda el texto
+
+                $("#pacientes-container").load(url + " #pacientes-container > *", function () {
+                    $("#paginaPacientesActual").val(pagina);
+                    $("#buscadorPacientes").val(valorInput); // 🔄 Restaura texto
+                    $("#buscadorPacientes").focus(); // Opcional
+                });
+            }
+
+            function cargarProductos(buscador = "", pagina = 1) {
+                const paginaPacientes = $("#paginaPacientesActual").val() || 1;
+                const url = `/PuntoVenta/Index?buscadorProductos=${encodeURIComponent(buscador)}&paginaProductos=${pagina}&paginaPacientes=${paginaPacientes}`;
+
+                const valorInput = $("#buscadorProductos").val();
+
+                $("#productos-container").load(url + " #productos-container > *", function () {
+                    $("#paginaProductosActual").val(pagina);
+                    $("#buscadorProductos").val(valorInput);
+                    $("#buscadorProductos").focus();
+                });
+            }
+
+            // ✅ Live search con debounce + input fijo
+            $(document).on("keyup", "#buscadorPacientes", function () {
+                clearTimeout(debounceTimer);
+                const valor = $(this).val();
+                debounceTimer = setTimeout(() => {
+                    cargarPacientes(valor, 1);
+                }, 300);
+            });
+
+            $(document).on("keyup", "#buscadorProductos", function () {
+                clearTimeout(debounceTimer);
+                const valor = $(this).val();
+                debounceTimer = setTimeout(() => {
+                    cargarProductos(valor, 1);
+                }, 300);
+            });
+
+            // ✅ Paginación con input persistente
+            $(document).on("click", "#pacientes-container .pagination a", function (e) {
+                e.preventDefault();
+                const pagina = $(this).data("pagina");
+                const buscador = $("#buscadorPacientes").val();
+                cargarPacientes(buscador, pagina);
+            });
+
+            $(document).on("click", "#productos-container .pagination a", function (e) {
+                e.preventDefault();
+                const pagina = $(this).data("pagina");
+                const buscador = $("#buscadorProductos").val();
+                cargarProductos(buscador, pagina);
+            });
+        });
+    </script>
+}
