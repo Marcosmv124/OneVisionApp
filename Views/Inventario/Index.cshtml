@@ -1,100 +1,113 @@
 ﻿@model One_Vision.Utils.Paginacion<One_Vision.Models.Producto>
+@using System.Security.Claims
 
 @{
     ViewData["Title"] = "Inventario";
+    var esAdmin = User.IsInRole("Administrador");
 }
 
-<div id="productos-container">
-    <div class="text-center mb-4">
-        <h1 class="display-6"><i class="bi bi-boxes me-2"></i>Inventario de Productos</h1>
+@if (!esAdmin)
+{
+    <div class="container text-center mt-5">
+        <h1 class="text-danger"><i class="bi bi-shield-lock-fill"></i> Acceso Denegado</h1>
+        <p class="lead">No tienes permisos para acceder a esta sección.</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Volver al inicio</a>
     </div>
-
-    <div class="d-flex justify-content-between mb-3">
-        <a asp-action="Create" class="btn btn-info text-white">
-            <i class="bi bi-plus-circle-fill me-1"></i>Agregar nuevo producto
-        </a>
-
-        <nav>
-            <ul class="pagination justify-content-end mb-0">
-                @if (Model.TienePaginaAnterior)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="?paginaProductos=@(Model.PaginaActual - 1)">Anterior</a>
-                    </li>
-                }
-
-                @for (int i = 1; i <= Model.TotalPaginas; i++)
-                {
-                    <li class="page-item @(i == Model.PaginaActual ? "active" : "")">
-                        <a class="page-link" href="?paginaProductos=@i">@i</a>
-                    </li>
-                }
-
-                @if (Model.TienePaginaSiguiente)
-                {
-                    <li class="page-item">
-                        <a class="page-link" href="?paginaProductos=@(Model.PaginaActual + 1)">Siguiente</a>
-                    </li>
-                }
-            </ul>
-        </nav>
-    </div>
-
-    <div class="card shadow-sm border-0">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0"><i class="bi bi-clipboard-data-fill me-2"></i>Lista de Productos</h5>
+}
+else
+{
+    <div id="productos-container">
+        <div class="text-center mb-4">
+            <h1 class="display-6"><i class="bi bi-boxes me-2"></i>Inventario de Productos</h1>
         </div>
-        <div class="card-body p-0">
-            <table class="table table-hover table-striped mb-0 align-middle text-center">
-                <thead class="table-light">
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Precio Venta</th>
-                        <th>Precio Compra</th>
-                        <th>Existencia</th>
-                        <th>Categoría</th>
-                        <th>Proveedor</th>
-                        <th>Moda</th>
-                        <th>Diseño</th>
-                        <th>Color</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Items)
+
+        <div class="d-flex justify-content-between mb-3">
+            <a asp-action="Create" class="btn btn-info text-white">
+                <i class="bi bi-plus-circle-fill me-1"></i>Agregar nuevo producto
+            </a>
+
+            <nav>
+                <ul class="pagination justify-content-end mb-0">
+                    @if (Model.TienePaginaAnterior)
                     {
-                        <tr>
-                            <td>@item.CodigoDeBarra</td>
-                            <td>@item.Nombre</td>
-                            <td>@item.PrecioDeVenta.ToString("C")</td>
-                            <td>@item.PrecioDeCompra.ToString("C")</td>
-                            <td>@item.Existencia</td>
-                            <td>@item.Categoria</td>
-                            <td>@item.Proveedor</td>
-                            <td>@item.Moda</td>
-                            <td>@item.Diseño</td>
-                            <td>@item.Color</td>
-                            <td>@item.Fecha.ToShortDateString()</td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-warning me-1">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-info text-white me-1">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <li class="page-item">
+                            <a class="page-link" href="?paginaProductos=@(Model.PaginaActual - 1)">Anterior</a>
+                        </li>
                     }
-                </tbody>
-            </table>
+
+                    @for (int i = 1; i <= Model.TotalPaginas; i++)
+                    {
+                        <li class="page-item @(i == Model.PaginaActual ? "active" : "")">
+                            <a class="page-link" href="?paginaProductos=@i">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.TienePaginaSiguiente)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?paginaProductos=@(Model.PaginaActual + 1)">Siguiente</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0"><i class="bi bi-clipboard-data-fill me-2"></i>Lista de Productos</h5>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover table-striped mb-0 align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio Venta</th>
+                            <th>Precio Compra</th>
+                            <th>Existencia</th>
+                            <th>Categoría</th>
+                            <th>Proveedor</th>
+                            <th>Moda</th>
+                            <th>Diseño</th>
+                            <th>Color</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>@item.CodigoDeBarra</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.PrecioDeVenta.ToString("C")</td>
+                                <td>@item.PrecioDeCompra.ToString("C")</td>
+                                <td>@item.Existencia</td>
+                                <td>@item.Categoria</td>
+                                <td>@item.Proveedor</td>
+                                <td>@item.Moda</td>
+                                <td>@item.Diseño</td>
+                                <td>@item.Color</td>
+                                <td>@item.Fecha.ToShortDateString()</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-warning me-1">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-info text-white me-1">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.CodigoDeBarra" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+}
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

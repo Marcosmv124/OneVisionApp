@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews(); // MVC
 builder.Services.AddControllers();          // API
 
+ 
 // --- DbContext compartido ---
 builder.Services.AddDbContext<OneVisionDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -26,7 +27,7 @@ builder.Services.AddScoped<PasswordHasher<Usuario>>();
 // --- Cliente HTTP para llamadas API desde MVC ---
 builder.Services.AddHttpClient();
 
-// --- Autenticación con cookies (predeterminada para MVC) y JWT (usado solo en API cuando se envía el header)
+// --- Autenticaciï¿½n con cookies (predeterminada para MVC) y JWT (usado solo en API cuando se envï¿½a el header)
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -67,12 +68,12 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "OneVision API",
         Version = "v1",
-        Description = "Documentación de la API de One Vision Optical Center"
+        Description = "Documentaciï¿½n de la API de One Vision Optical Center"
     });
 });
 
 var app = builder.Build();
-
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 // --- Manejo de errores y HSTS ---
 if (!app.Environment.IsDevelopment())
 {

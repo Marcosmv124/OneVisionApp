@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using One_Vision.Models;
+using One_Vision.PDF; 
+using One_Vision.DTOs;
 using System.Collections.Generic;
 using System.Linq;
+using Rotativa.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using One_Vision.Utils;
+using QuestPDF.Fluent;
 
 namespace One_Vision.Controllers
 {
@@ -18,23 +22,6 @@ namespace One_Vision.Controllers
         {
             _context = context;
         }
-        [Authorize]
-        //public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
-        //{
-        //    int tamanioPagina = 5;
-        //    var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
-        //    var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
-
-        //    var viewModel = new PacienteProductoViewModel
-        //    {
-        //        //Pacientes = _context.Pacientes.ToList(),
-        //        //Productos = _context.Productos.ToList()
-        //        Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
-        //        Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
-        //    };
-
-        //    return View(viewModel);
-        //}
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index(string buscadorPacientes, string buscadorProductos, int paginaPacientes = 1, int paginaProductos = 1)
@@ -71,21 +58,6 @@ namespace One_Vision.Controllers
 
             return View("Index", viewModel);
         }
-
-        //[Authorize]
-        //public IActionResult Index()
-
-        //{ 
-        //        var viewModel = new PacienteProductoViewModel
-        //        {
-        //            Pacientes = _context.Pacientes.ToList(),
-        //            Productos = _context.Productos.ToList()
-        //        };
-
-        //        return View(viewModel);
-
-        //}
-
         [Authorize]
         // GET: Pacientes/Details/5
         public async Task<IActionResult> Details(string id)
@@ -215,5 +187,93 @@ namespace One_Vision.Controllers
         {
             return _context.Pacientes.Any(e => e.ID == id);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> FinalizarVenta(VentaViewModel model)
+        {
+            if (string.IsNullOrWhiteSpace(model.ID_Paciente) || model.Productos == null || model.Productos.Count == 0)
+            {
+                TempData["Error"] = "Faltan datos para finalizar la venta.";
+                return RedirectToAction("Index");
+            }
+
+            var paciente = await _context.Pacientes.FindAsync(model.ID_Paciente);
+            if (paciente == null)
+            {
+                TempData["Error"] = "Paciente no encontrado.";
+                return RedirectToAction("Index");
+            }
+
+            var anticipoAbonado = model.AnticipoEnDolar ? model.Anticipo * model.ValorDolar : model.Anticipo;
+
+            var venta = new Venta
+            {
+                ID_Paciente = model.ID_Paciente,
+                Abonado = anticipoAbonado,
+                Total = model.PrecioTotal,
+                Fecha = DateTime.Now
+            };
+
+            _context.Ventas.Add(venta);
+            await _context.SaveChangesAsync(); // Para obtener ID_Venta
+
+            foreach (var item in model.Productos)
+            {
+                var producto = await _context.Productos.FindAsync(item.CodigoDeBarra);
+                if (producto == null || producto.Existencia < item.Cantidad)
+                {
+                    TempData["Error"] = $"Error con el producto: {item.CodigoDeBarra}";
+                    return RedirectToAction("Index");
+                }
+
+                producto.Existencia -= item.Cantidad;
+
+                _context.VentaProductos.Add(new VentaProducto
+                {
+                    ID_Venta = venta.ID_Venta,
+                    CodigoDeBarra = item.CodigoDeBarra,
+                    Cantidad = item.Cantidad
+                });
+            }
+
+            await _context.SaveChangesAsync();
+            TempData["UltimaVentaId"] = venta.ID_Venta;
+            TempData["Exito"] = $"Venta registrada correctamente con ID: {venta.ID_Venta}";
+            return RedirectToAction("Index");
+        }
+        [Authorize]
+        public async Task<IActionResult> GenerarRecibo(int idVenta)
+        {
+            var venta = await _context.Ventas
+                .Include(v => v.VentaProductos)
+                .ThenInclude(vp => vp.Producto)
+                .FirstOrDefaultAsync(v => v.ID_Venta == idVenta);
+
+            if (venta == null)
+                return NotFound();
+
+            var model = new VentaReciboViewModel
+            {
+                ID_Venta = venta.ID_Venta,
+                ID_Paciente = venta.ID_Paciente,
+                Total = venta.Total,
+                Abonado = venta.Abonado,
+                Fecha = venta.Fecha,
+                Productos = venta.VentaProductos.Select(vp => new VentaReciboViewModel.VentaProductoDetalle
+                {
+                    Nombre = vp.Producto.Nombre,
+                    Cantidad = vp.Cantidad,
+                    Precio = vp.Producto.PrecioDeVenta
+                }).ToList()
+            };
+
+            var document = new ReciboPdf { Datos = model };
+            var pdf = document.GeneratePdf();
+
+            return File(pdf, "application/pdf", $"Recibo_{venta.ID_Venta}.pdf");
+        }
+
+
     }
 }

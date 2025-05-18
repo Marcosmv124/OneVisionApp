@@ -18,7 +18,7 @@ namespace One_Vision.Controllers
         }
         // GET: Inventario
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1)
         {
             int tamanioPagina = 5;
@@ -27,7 +27,7 @@ namespace One_Vision.Controllers
             var productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina);
             return View(productos); // ✔️ este es del tipo correcto
         }
-        [Authorize]
+          [Authorize(Roles = "Administrador")]
         // GET: Productos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -47,14 +47,14 @@ namespace One_Vision.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Inventario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Empleado")]
         // POST: Inventario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,7 +78,7 @@ namespace One_Vision.Controllers
             return View(producto);
         }
 
-
+        [Authorize(Roles = "Empleado")]
         // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -94,7 +94,7 @@ namespace One_Vision.Controllers
             }
             return View(producto);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Productos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -129,7 +129,7 @@ namespace One_Vision.Controllers
             }
             return View(producto);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Productos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -147,7 +147,7 @@ namespace One_Vision.Controllers
 
             return View(producto);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

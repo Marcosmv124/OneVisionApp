@@ -15,24 +15,7 @@ namespace One_Vision.Controllers
         {
             _context = context;
         }
-        [Authorize]
-        //public async Task<IActionResult> Index(int paginaPacientes = 1, int paginaProductos = 1 )
-        //{
-        //    int tamanioPagina = 5;
-        //    var pacientesQuery = _context.Pacientes.OrderBy(p => p.ID); // o como ordenes normalmente
-        //    var productosQuery = _context.Productos.OrderBy(p => p.CodigoDeBarra);
-
-        //    var viewModel = new PacienteProductoViewModel
-        //    {
-        //        //Pacientes = _context.Pacientes.ToList(),
-        //        //Productos = _context.Productos.ToList()
-        //        Pacientes = await Paginacion<Paciente>.CrearAsync(pacientesQuery, paginaPacientes, tamanioPagina),
-        //        Productos = await Paginacion<Producto>.CrearAsync(productosQuery, paginaProductos, tamanioPagina)
-        //    };
-
-        //    return View(viewModel);
-        //}
-        [Authorize]
+        [Authorize(Roles = "Doctor, Administrador")]
         [HttpGet]
         public async Task<IActionResult> Index(string buscadorPacientes, string buscadorProductos, int paginaPacientes = 1, int paginaProductos = 1)
         {
@@ -83,7 +66,7 @@ namespace One_Vision.Controllers
 
         //}
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Pacientes/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -101,7 +84,7 @@ namespace One_Vision.Controllers
 
             return View(paciente);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Pacientes/Create
         public IActionResult Create()
         {
@@ -111,6 +94,7 @@ namespace One_Vision.Controllers
         // POST: Pacientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
@@ -123,7 +107,7 @@ namespace One_Vision.Controllers
             }
             return View(paciente);
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Pacientes/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -139,10 +123,11 @@ namespace One_Vision.Controllers
             }
             return View(paciente);
         }
-        [Authorize]
+     
         // POST: Pacientes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("ID,Nombre,Edad,Telefono,Correo,Direccion")] Paciente paciente)
@@ -174,7 +159,7 @@ namespace One_Vision.Controllers
             }
             return View(paciente);
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Pacientes/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
@@ -192,7 +177,7 @@ namespace One_Vision.Controllers
 
             return View(paciente);
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // POST: Pacientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -212,12 +197,12 @@ namespace One_Vision.Controllers
         {
             return _context.Pacientes.Any(e => e.ID == id);
         }
-
+        [Authorize(Roles = "Administrador")]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult CreateTest()
         {

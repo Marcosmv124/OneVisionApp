@@ -1,4 +1,4 @@
-﻿@model One_Vision.DTOs.RegisterRequest; 
+﻿@model One_Vision.DTOs.RegisterRequest;
 
 @{
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
@@ -10,10 +10,10 @@
         color: white;
     }
 
-        .btn-color:hover {
-            background-color: #C9B489;
-            color: white;
-        }
+    .btn-color:hover {
+        background-color: #C9B489;
+        color: white;
+    }
 
     .logo-container {
         display: flex;
@@ -23,13 +23,12 @@
         border: 30px;
 
     }
- 
 </style>
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row w-100 d-flex align-items-center justify-content-center">
         <div class="col-md-4 logo-container">
-            <img src="@Url.Content("~/css/logo.png")" alt="logo" style="width: 500px; height: auto;"/>
+            <img src="@Url.Content("~/css/logo.png")" alt="logo" style="width: 500px; height: auto;" />
         </div>
 
         <div class="col-md-6">
@@ -64,24 +63,20 @@
                             <label asp-for="Password" class="form-label">Contraseña</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                <input asp-for="Password" type="password" class="form-control" id="passwordInput" required />
+                                <input asp-for="Password" type="password" class="form-control" id="passwordInput"
+                                    required />
                             </div>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="mostrar" onclick="togglePasswordVisibility()">
+                            <input type="checkbox" class="form-check-input" id="mostrar"
+                                onclick="togglePasswordVisibility()">
                             <label class="form-check-label" for="mostrar">Mostrar contraseña</label>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Rango" class="form-label">Rango</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                                <input asp-for="Rango" class="form-control" required />
-                            </div>
-                            <span asp-validation-for="Rango" class="text-danger"></span>
-                        </div>
+                        <input type="hidden" asp-for="Rango" value="2" />
+
 
                         <div class="mb-4">
                             <label asp-for="Correo" class="form-label">Correo electrónico</label>
@@ -104,7 +99,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 @section Scripts {
     <script>
@@ -113,4 +108,5 @@
             input.type = input.type === "password" ? "text" : "password";
         }
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }

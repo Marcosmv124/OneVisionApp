@@ -1,11 +1,74 @@
-﻿
+﻿@model One_Vision.DTOs.RegisterRequest
 @{
-
-  
-    ViewData["Title"] = "One Vision";
+    ViewData["Title"] = "Configuración de Usuarios";
 }
 
-<h1>Modificar datos de usuario</h1>
+<h2>Configuración de Usuarios</h2>
+<hr />
 
+<div class="mb-3">
+    <label for="usuarioIdSelect">Seleccionar ID de Usuario</label>
+    <select id="usuarioIdSelect" class="form-select">
+        <option value="">Seleccione un usuario</option>
+        @foreach (var usuario in ViewBag.Usuarios as List<One_Vision.Models.Usuario>)
+        {
+            <option value="@usuario.ID">@usuario.ID - @usuario.Nombre</option>
+        }
+    </select>
+</div>
 
+<form asp-action="Edit" method="post">
+    <input type="hidden" id="ID" name="ID" />
 
+    <div class="mb-3">
+        <label for="Nombre">Nombre</label>
+        <input type="text" id="Nombre" name="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="UsuarioNombre">Nombre de Usuario</label>
+        <input type="text" id="UsuarioNombre" name="UsuarioNombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="Correo">Correo</label>
+        <input type="email" id="Correo" name="Correo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="Password">Contraseña</label>
+        <input type="password" id="Password" name="Password" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label for="Rango">Rango</label>
+        <select id="Rango" name="Rango" class="form-select">
+            @foreach (var rango in Enum.GetValues(typeof(RolUsuario)))
+            {
+                <option value="@((int)rango)">@rango</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById("usuarioIdSelect").addEventListener("change", function () {
+            var selectedId = this.value;
+            if (selectedId) {
+                fetch('/Usuarios/ObtenerUsuariosPorId?id=' + selectedId)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("ID").value = data.id;
+                        document.getElementById("Nombre").value = data.nombre;
+                        document.getElementById("UsuarioNombre").value = data.usuarioNombre;
+                        document.getElementById("Correo").value = data.correo;
+                        document.getElementById("Password").value = data.password;
+                        document.getElementById("Rango").value = data.rango;
+                    });
+            }
+        });
+    </script>
+}

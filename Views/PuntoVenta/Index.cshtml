@@ -8,7 +8,20 @@
     <div class="text-center mb-4">
         <h1 class="display-6"><i class="bi bi-shop me-2"></i>Punto de venta</h1>
     </div>
-
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Exito"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
     <div class="d-flex justify-content-end mb-3">
         <a asp-action="Create" class="btn btn-success">
             <i class="bi bi-person-plus-fill me-1"></i>Registrar Paciente
@@ -18,14 +31,12 @@
     <input type="hidden" id="paginaPacientesActual" value="@Model.Pacientes.PaginaActual" />
     <input type="hidden" id="paginaProductosActual" value="@Model.Productos.PaginaActual" />
 
-    <!-- Pacientes -->
-    <div class="card shadow-sm border-0 mb-5" id="pacientes-container">
+    <!-- Lista de Pacientes -->
+    <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Pacientes</h5>
-            <div class="d-flex">
-                <input type="text" id="buscadorPacientes" class="form-control form-control-sm me-2"
-                    placeholder="Buscar paciente..." />
-            </div>
+            <input type="text" id="buscadorPacientes" class="form-control form-control-sm w-25"
+                placeholder="Buscar paciente..." />
         </div>
         <div class="card-body p-0">
             <table class="table table-hover table-striped mb-0">
@@ -49,15 +60,6 @@
                             <td>@item.Correo</td>
                             <td>@item.Direccion</td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-warning me-1">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-info me-1 text-white">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash-fill"></i>
-                                </a>
                                 <button class="btn btn-sm btn-success seleccionar-paciente" data-id="@item.ID"
                                     data-nombre="@item.Nombre" type="button">
                                     <i class="bi bi-check-circle"></i>
@@ -67,119 +69,85 @@
                     }
                 </tbody>
             </table>
-            <!-- Paginación pacientes -->
-            <nav class="mt-3">
-                <ul class="pagination justify-content-center">
-                    @if (Model.Pacientes.TienePaginaAnterior)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual - 1)">Anterior</a>
-                        </li>
-                    }
-                    @for (int i = 1; i <= Model.Pacientes.TotalPaginas; i++)
-                    {
-                        <li class="page-item @(i == Model.Pacientes.PaginaActual ? "active" : "")">
-                            <a class="page-link" href="#" data-pagina="@i">@i</a>
-                        </li>
-                    }
-                    @if (Model.Pacientes.TienePaginaSiguiente)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="#" data-pagina="@(@Model.Pacientes.PaginaActual + 1)">Siguiente</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
         </div>
     </div>
 
-    <!-- Productos y Zona de cobro -->
-    <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap;">
-        <div style="flex: 1;" id="productos-container">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="fas fa-box me-2"></i>Lista de Productos</h5>
-                    <div class="d-flex">
-                        <input type="text" id="buscadorProductos" class="form-control form-control-sm me-2"
-                            placeholder="Buscar producto..." />
+    <!-- Lista de Productos -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-box me-2"></i>Lista de Productos</h5>
+            <input type="text" id="buscadorProductos" class="form-control form-control-sm w-25"
+                placeholder="Buscar producto..." />
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nombre del producto</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Productos.Items)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.PrecioDeVenta.ToString("C")</td>
+                            <td>@item.Categoria - @item.Color - @item.Diseño</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary agregar-producto"
+                                    data-id="@item.CodigoDeBarra" data-nombre="@item.Nombre"
+                                    data-precio="@item.PrecioDeVenta">
+                                    <i class="bi bi-plus-circle"></i> Agregar
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Zona de cobro -->
+    <div class="card p-3 border">
+        <h4>Zona de cobro</h4>
+        <form id="formFinalizarVenta" asp-action="FinalizarVenta" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ID_Paciente" id="form-ID_Paciente" />
+            <input type="hidden" name="PrecioTotal" id="form-PrecioTotal" />
+            <input type="hidden" name="Anticipo" id="form-Anticipo" />
+            <input type="hidden" name="AnticipoEnDolar" id="form-AnticipoEnDolar" />
+            <input type="hidden" name="ValorDolar" id="form-ValorDolar" />
+
+            <div class="row mb-2">
+                <div class="col">
+                    <input type="text" class="form-control" id="valorDolar" placeholder="Valor del dólar actual">
+                </div>
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="chkAnticipoDolar">
+                        <label class="form-check-label">Anticipo en Dólar</label>
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    <table class="table table-hover table-striped mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Nombre del producto</th>
-                                <th>Precio</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Productos.Items)
-                            {
-                                <tr>
-                                    <td>@item.Nombre</td>
-                                    <td>@item.PrecioDeVenta.ToString("C")</td>
-                                    <td>@item.Categoria - @item.Color - @item.Diseño</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary agregar-producto"
-                                            data-id="@item.CodigoDeBarra" data-nombre="@item.Nombre"
-                                            data-precio="@item.PrecioDeVenta">
-                                            <i class="bi bi-plus-circle"></i> Agregar
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <!-- Paginación productos -->
-                    <nav class="mt-3">
-                        <ul class="pagination justify-content-center">
-                            @if (Model.Productos.TienePaginaAnterior)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="#"
-                                        data-pagina="@(@Model.Productos.PaginaActual - 1)">Anterior</a>
-                                </li>
-                            }
-                            @for (int i = 1; i <= Model.Productos.TotalPaginas; i++)
-                            {
-                                <li class="page-item @(i == Model.Productos.PaginaActual ? "active" : "")">
-                                    <a class="page-link" href="#" data-pagina="@i">@i</a>
-                                </li>
-                            }
-                            @if (Model.Productos.TienePaginaSiguiente)
-                            {
-                                <li class="page-item">
-                                    <a class="page-link" href="#"
-                                        data-pagina="@(@Model.Productos.PaginaActual + 1)">Siguiente</a>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
+                <div class="col">
+                    <input type="text" class="form-control" id="inputAnticipo" placeholder="Anticipo">
                 </div>
             </div>
-        </div>
-
-        <div style="flex: 1; border: 1px solid #ccc; padding: 10px;">
-              <h4 class="mb-3">Zona de cobro</h4> <!-- Título agregado -->
-            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-                <input type="text" id="valorDolar" placeholder="Valor del dólar actual"
-                    style="flex: 1; padding: 5px; border-radius: 8px;">
-                <label style="display: flex; align-items: center; gap: 5px; padding: 10px;">
-                    <input type="checkbox" id="chkAnticipoDolar"> Anticipo en Dólar
-                </label>
-                <input type="text" id="inputAnticipo" placeholder="Anticipo"
-                    style="flex: 1; padding: 10px; border-radius: 8px;">
-                <input type="text" id="inputAnticipoAbonado" placeholder="Anticipo abonado"
-                    style="flex: 1; padding: 10px; border-radius: 8px;" readonly>
-                <input type="text" id="inputPrecioTotal" placeholder="Precio total de productos"
-                    style="flex: 1; padding: 10px; border-radius: 8px;" readonly>
-                <input type="text" id="inputTotalRestante" placeholder="Total restante"
-                    style="flex: 1; padding: 10px; border-radius: 8px;" readonly>
+            <div class="row mb-2">
+                <div class="col">
+                    <input type="text" class="form-control" id="inputAnticipoAbonado" placeholder="Anticipo abonado"
+                        readonly>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="inputPrecioTotal"
+                        placeholder="Precio total de productos" readonly>
+                </div>
             </div>
+            <input type="text" class="form-control mb-2" id="inputTotalRestante" placeholder="Total restante" readonly>
+            <input type="text" class="form-control mb-2" id="inputCambio" placeholder="Cambio" readonly>
 
-            <div id="zona-productos" style="margin-bottom: 10px;"></div>
 
             <table class="table table-bordered table-sm">
                 <thead class="table-light">
@@ -199,191 +167,130 @@
                         <td id="zona-abonado">-</td>
                         <td id="zona-adeudo">-</td>
                     </tr>
+                    <tr>
+                        <td colspan="4" class="text-end fw-bold">Cambio:</td>
+                        <td id="zona-cambio">-</td>
+                    </tr>
                 </tbody>
             </table>
 
-            <div class="mt-3 d-flex gap-2">
-                <button class="btn btn-primary" disabled id="btnFinalizarVenta">Finalizar Venta</button>
-                <button class="btn btn-secondary" id="btnGenerarRecibo">Generar Recibo</button>
-            </div>
+            <div class="mt-2 d-flex gap-2">
+                <button class="btn btn-primary" id="btnFinalizarVenta" type="button">Finalizar Venta</button>
+                <button class="btn btn-outline-danger" id="btnLimpiarTodo" type="button">Limpiar selección</button>
+                @if (TempData["UltimaVentaId"] != null)
+                {
+                    <a class="btn btn-secondary" target="_blank" asp-action="GenerarRecibo"
+                        asp-route-idVenta="@TempData["UltimaVentaId"]">
+                        Generar Recibo PDF
+                    </a>
+                }
 
-            <div id="mensaje-venta" class="alert d-none mt-3"></div>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        let productosVenta = [];
+
         $(function () {
-            let productosVenta = [];
+            $(".seleccionar-paciente").on("click", function () {
+                const id = $(this).data("id");
+                $("#form-ID_Paciente").val(id);
+                $("#zona-id-paciente").text(id);
+            });
 
-            function actualizarZonaCobro() {
-                let contenedorProductos = $("#zona-productos");
-                contenedorProductos.empty();
+            $(".agregar-producto").on("click", function () {
+                const id = $(this).data("id");
+                const nombre = $(this).data("nombre");
+                const precio = parseFloat($(this).data("precio"));
+                const existente = productosVenta.find(p => p.codigo === id);
 
-                if (productosVenta.length === 0) {
-                    contenedorProductos.text("No hay productos agregados");
-                    $("#inputPrecioTotal").val('0');
-                    $("#inputAnticipoAbonado").val('0');
-                    $("#inputTotalRestante").val('0');
-                    $("#zona-venta").text('0');
-                    $("#zona-abonado").text('0');
-                    $("#zona-adeudo").text('0');
-                    $("#zona-productos-lista").text("-");
-                    actualizarEstadoBotonFinalizar();
-                    return;
-                }
-
-                let html = `<table class="table table-bordered table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
-                                    <th>Subtotal</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-
-                let total = 0;
-                let listaProductosTexto = "";
-                productosVenta.forEach((p, i) => {
-                    let subtotal = p.precio * p.cantidad;
-                    total += subtotal;
-                    listaProductosTexto += `${p.nombre} x${p.cantidad}, `;
-                    html += `<tr>
-                                <td>${p.nombre}</td>
-                                <td>${p.cantidad}</td>
-                                <td>${p.precio.toFixed(2)}</td>
-                                <td>${subtotal.toFixed(2)}</td>
-                                <td><button class="btn btn-danger btn-sm eliminar-producto" data-index="${i}">Eliminar</button></td>
-                            </tr>`;
-                });
-
-                html += `</tbody></table>`;
-
-                contenedorProductos.html(html);
-                $("#zona-productos-lista").text(listaProductosTexto.slice(0, -2));
-
-                $("#inputPrecioTotal").val(total.toFixed(2));
-
-                let anticipo = parseFloat($("#inputAnticipo").val()) || 0;
-                let valorDolar = parseFloat($("#valorDolar").val()) || 1;
-                let anticipoEnDolar = $("#chkAnticipoDolar").is(":checked");
-
-                let anticipoAbonado = anticipoEnDolar ? anticipo * valorDolar : anticipo;
-                $("#inputAnticipoAbonado").val(anticipoAbonado.toFixed(2));
-
-                let totalRestante = total - anticipoAbonado;
-                if (totalRestante < 0) totalRestante = 0;
-                $("#inputTotalRestante").val(totalRestante.toFixed(2));
-
-                $("#zona-venta").text(total.toFixed(2));
-                $("#zona-abonado").text(anticipoAbonado.toFixed(2));
-                $("#zona-adeudo").text(totalRestante.toFixed(2));
-
-                actualizarEstadoBotonFinalizar();
-            }
-
-            function actualizarEstadoBotonFinalizar() {
-                const idPaciente = $("#zona-id-paciente").text();
-                const tienePaciente = idPaciente && idPaciente !== "-";
-                const tieneProductos = productosVenta.length > 0;
-                $("#btnFinalizarVenta").prop("disabled", !(tienePaciente && tieneProductos));
-            }
-
-            // Delegación de eventos para agregar producto
-            $("#productos-container").on("click", ".agregar-producto", function () {
-                let codigo = $(this).data("id");
-                let nombre = $(this).data("nombre");
-                let precio = parseFloat($(this).data("precio"));
-
-                let existente = productosVenta.find(p => p.codigo === codigo);
                 if (existente) {
                     existente.cantidad++;
                 } else {
-                    productosVenta.push({ codigo, nombre, precio, cantidad: 1 });
+                    productosVenta.push({ codigo: id, nombre, precio, cantidad: 1 });
                 }
 
                 actualizarZonaCobro();
             });
 
-            // Delegación de eventos para eliminar producto
-            $("#zona-productos").on("click", ".eliminar-producto", function () {
-                let index = $(this).data("index");
-                productosVenta.splice(index, 1);
-                actualizarZonaCobro();
+            $("#btnFinalizarVenta").on("click", function () {
+                const idPaciente = $("#form-ID_Paciente").val();
+                if (!idPaciente || productosVenta.length === 0) {
+                    alert("Selecciona un paciente y al menos un producto.");
+                    return;
+                }
+
+                const anticipo = parseFloat($("#inputAnticipo").val()) || 0;
+                const valorDolar = parseFloat($("#valorDolar").val()) || 1;
+                const enDolar = $("#chkAnticipoDolar").is(":checked");
+                const total = productosVenta.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+
+                $("#form-PrecioTotal").val(total.toFixed(2));
+                $("#form-Anticipo").val(anticipo.toFixed(2));
+                $("#form-ValorDolar").val(valorDolar.toFixed(2));
+                $("#form-AnticipoEnDolar").val(enDolar);
+
+                $("#formFinalizarVenta input[name^='Productos']").remove();
+
+                productosVenta.forEach((p, i) => {
+                    const fields = `
+                        <input type="hidden" name="Productos[${i}].CodigoDeBarra" value="${p.codigo}" />
+                        <input type="hidden" name="Productos[${i}].Cantidad" value="${p.cantidad}" />
+                        <input type="hidden" name="Productos[${i}].Precio" value="${p.precio}" />
+                    `;
+                    $("#formFinalizarVenta").append(fields);
+                });
+
+                $("#formFinalizarVenta").submit();
             });
 
-            // Cambios en anticipo o valor dólar
             $("#inputAnticipo, #valorDolar, #chkAnticipoDolar").on("input change", actualizarZonaCobro);
 
-            // Selección de paciente
-            $("#pacientes-container").on("click", ".seleccionar-paciente", function () {
-                var idPaciente = $(this).data("id");
-                $("#zona-id-paciente").text(idPaciente);
+                  function actualizarZonaCobro() {
+            const totalVenta = productosVenta.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+            const anticipo = parseFloat($("#inputAnticipo").val()) || 0;
+            const valorDolar = parseFloat($("#valorDolar").val()) || 1;
+            const enDolar = $("#chkAnticipoDolar").is(":checked");
+            const anticipoAbonado = enDolar ? anticipo * valorDolar : anticipo;
+            const restante = Math.max(0, totalVenta - anticipoAbonado);
+            const cambio = anticipoAbonado > totalVenta ? anticipoAbonado - totalVenta : 0;
+            const lista = productosVenta.map(p => `${p.nombre} x${p.cantidad}`).join(", ");
 
-                $(".table tbody tr").removeClass("fila-seleccionada");
-                $(this).closest("tr").addClass("fila-seleccionada");
+            $("#zona-productos-lista").text(lista || "-");
+            $("#zona-venta").text(totalVenta.toFixed(2));
+            $("#zona-abonado").text(anticipoAbonado.toFixed(2));
+            $("#zona-adeudo").text(restante.toFixed(2));
+            $("#zona-cambio").text(cambio.toFixed(2));
 
-                actualizarEstadoBotonFinalizar();
-            });
+            $("#inputPrecioTotal").val(totalVenta.toFixed(2));
+            $("#inputAnticipoAbonado").val(anticipoAbonado.toFixed(2));
+            $("#inputTotalRestante").val(restante.toFixed(2));
+            $("#inputCambio").val(cambio.toFixed(2));
+        }
 
-            // Finalizar venta
-            $("#btnFinalizarVenta").on("click", function () {
-                var idPaciente = $("#zona-id-paciente").text();
-                if (!idPaciente || idPaciente === "-") {
-                    $("#mensaje-venta").removeClass("d-none alert-success").addClass("alert-danger").text("Selecciona un paciente primero");
-                    return;
-                }
+                    $("#btnLimpiarTodo").on("click", function () {
+            productosVenta = [];
+            $("#form-ID_Paciente").val("");
+            $("#inputAnticipo").val("");
+            $("#inputPrecioTotal").val("");
+            $("#inputAnticipoAbonado").val("");
+            $("#inputTotalRestante").val("");
+            $("#valorDolar").val("");
+            $("#chkAnticipoDolar").prop("checked", false);
 
-                if (productosVenta.length === 0) {
-                    $("#mensaje-venta").removeClass("d-none alert-success").addClass("alert-danger").text("Agrega al menos un producto");
-                    return;
-                }
+            $("#zona-id-paciente").text("-");
+            $("#zona-productos-lista").text("-");
+            $("#zona-venta").text("-");
+            $("#zona-abonado").text("-");
+            $("#zona-adeudo").text("-");
 
-                let anticipo = parseFloat($("#inputAnticipo").val()) || 0;
+            actualizarZonaCobro();
+        });
 
-                let data = {
-                    ID_Paciente: idPaciente,
-                    Abonado: anticipo,
-                    Productos: productosVenta.map(p => ({
-                        CodigoDeBarra: p.codigo,
-                        Cantidad: p.cantidad,
-                        Precio: p.precio
-                    }))
-                };
-
-                fetch('/api/Ventas/CrearVenta', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
-                    .then(async response => {
-                        if (!response.ok) {
-                            const errorText = await response.text();
-                            throw new Error(errorText);
-                        }
-                        return response.json();
-                    })
-                   /* .then(res => {
-                        //$("#mensaje-venta").removeClass("d-none alert-danger").addClass("alert-success")
-                            //.text(`Venta registrada con ID: ${res.ID_VentaAdeudo: ${res.Adeudo}`);
-
-                      //  productosVenta = [];
-                        $("#zona-id-paciente").text("-");
-                        actualizarZonaCobro();
-                    })
-                    .catch(e => {
-                        $("#mensaje-venta").removeClass("d-none alert-success").addClass("alert-danger")
-                            .text("Error al registrar venta: " + e.message);
-                    });*/
-            });
-
-            // Inicializa el estado correcto del botón finalizar
-            actualizarEstadoBotonFinalizar();
         });
     </script>
+  
 }
