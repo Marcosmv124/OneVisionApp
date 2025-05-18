@@ -9,6 +9,7 @@ namespace One_Vision.Controllers
 {
     public class HistorialController : Controller
     {
+        //Historial Controller
         private readonly OneVisionDbContext _context;
 
         public HistorialController(OneVisionDbContext context)
@@ -51,20 +52,6 @@ namespace One_Vision.Controllers
 
             return View("Index", viewModel);
         }
-
-        //[Authorize]
-        //public IActionResult Index()
-
-        //{ 
-        //        var viewModel = new PacienteProductoViewModel
-        //        {
-        //            Pacientes = _context.Pacientes.ToList(),
-        //            Productos = _context.Productos.ToList()
-        //        };
-
-        //        return View(viewModel);
-
-        //}
 
         [Authorize(Roles = "Administrador")]
         // GET: Pacientes/Details/5
