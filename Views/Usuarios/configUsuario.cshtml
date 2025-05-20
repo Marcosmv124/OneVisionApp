@@ -3,55 +3,69 @@
     ViewData["Title"] = "Configuración de Usuarios";
 }
 
-<h2>Configuración de Usuarios</h2>
-<hr />
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Configuración de Usuarios</h2>
+        <button class="btn btn-outline-primary" onclick="habilitarEdicion()">Editar Perfil</button>
+    </div>
 
-<div class="mb-3">
-    <label for="usuarioIdSelect">Seleccionar ID de Usuario</label>
-    <select id="usuarioIdSelect" class="form-select">
-        <option value="">Seleccione un usuario</option>
-        @foreach (var usuario in ViewBag.Usuarios as List<One_Vision.Models.Usuario>)
-        {
-            <option value="@usuario.ID">@usuario.ID - @usuario.Nombre</option>
-        }
-    </select>
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="usuarioIdSelect" class="form-label fw-semibold">Seleccionar ID de Usuario</label>
+                    <select id="usuarioIdSelect" class="form-select">
+                        <option value="">Seleccione un usuario</option>
+                        @foreach (var usuario in ViewBag.Usuarios as List<One_Vision.Models.Usuario>)
+                        {
+                            <option value="@usuario.ID">@usuario.ID - @usuario.Nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <form asp-action="Edit" method="post" enctype="multipart/form-data" id="formUsuario">
+                <input type="hidden" id="ID" name="ID" />
+
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <div class="col">
+                        <label for="Nombre" class="form-label fw-semibold">Nombre</label>
+                        <input type="text" id="Nombre" name="Nombre" class="form-control" disabled />
+                    </div>
+
+                    <div class="col">
+                        <label for="UsuarioNombre" class="form-label fw-semibold">Nombre de Usuario</label>
+                        <input type="text" id="UsuarioNombre" name="UsuarioNombre" class="form-control" disabled />
+                    </div>
+
+                    <div class="col">
+                        <label for="Correo" class="form-label fw-semibold">Correo</label>
+                        <input type="email" id="Correo" name="Correo" class="form-control" disabled />
+                    </div>
+
+                    <div class="col">
+                        <label for="Password" class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" id="Password" name="Password" class="form-control" disabled />
+                    </div>
+
+                    <div class="col">
+                        <label for="Rango" class="form-label fw-semibold">Rango</label>
+                        <select id="Rango" name="Rango" class="form-select" disabled>
+                            @foreach (var rango in Enum.GetValues(typeof(RolUsuario)))
+                            {
+                                <option value="@((int)rango)">@rango</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary w-20" id="btnActualizar" disabled>Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-<form asp-action="Edit" method="post">
-    <input type="hidden" id="ID" name="ID" />
-
-    <div class="mb-3">
-        <label for="Nombre">Nombre</label>
-        <input type="text" id="Nombre" name="Nombre" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="UsuarioNombre">Nombre de Usuario</label>
-        <input type="text" id="UsuarioNombre" name="UsuarioNombre" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Correo">Correo</label>
-        <input type="email" id="Correo" name="Correo" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Password">Contraseña</label>
-        <input type="password" id="Password" name="Password" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Rango">Rango</label>
-        <select id="Rango" name="Rango" class="form-select">
-            @foreach (var rango in Enum.GetValues(typeof(RolUsuario)))
-            {
-                <option value="@((int)rango)">@rango</option>
-            }
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
-</form>
 
 @section Scripts {
     <script>
@@ -70,5 +84,11 @@
                     });
             }
         });
+
+        function habilitarEdicion() {
+            document.querySelectorAll('#formUsuario input, #formUsuario select')
+                .forEach(el => el.disabled = false);
+            document.getElementById("btnActualizar").disabled = false;
+        }
     </script>
 }
