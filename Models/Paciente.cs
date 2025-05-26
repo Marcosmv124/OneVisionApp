@@ -6,8 +6,7 @@ namespace One_Vision.Models
     public class Paciente
     {
         [Key]
-        [StringLength(20)]
-        public string ID { get; set; }
+        public int ID { get; set; }  // Auto-incrementable
 
         [Required]
         [StringLength(100)]
@@ -26,6 +25,9 @@ namespace One_Vision.Models
 
         [StringLength(200)]
         public string Direccion { get; set; }
+
+        // Relación uno a muchos: Un paciente puede tener muchos exámenes completos
+        public virtual ICollection<Historial> Historiales { get; set; }
     }
 
 }

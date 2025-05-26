@@ -18,12 +18,13 @@ namespace One_Vision.Controllers
         {
             _context = context;
         }
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Productos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Productos.ToListAsync());
         }
+        
 
         // GET: Productos/Details/5
         public async Task<IActionResult> Details(int? id)

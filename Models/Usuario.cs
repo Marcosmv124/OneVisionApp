@@ -10,6 +10,10 @@ namespace One_Vision.Models
         public RolUsuario Rango { get; set; }
         public bool EmailConfirmado { get; set; } = false;
         public string? TokenVerificacion { get; set; }
+        //Nuevos campos
+        public string? TokenRecuperacion { get; set; }
+        public DateTime? RecuperacionExpira { get; set; }
+
     }
 
 }

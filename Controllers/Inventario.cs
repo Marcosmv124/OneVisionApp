@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using One_Vision.Models;
@@ -54,7 +53,7 @@ namespace One_Vision.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Empleado")]
+        [Authorize(Roles = "Administrador")]
         // POST: Inventario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,7 +77,7 @@ namespace One_Vision.Controllers
             return View(producto);
         }
 
-        [Authorize(Roles = "Empleado")]
+        [Authorize(Roles = "Administrador")]
         // GET: Productos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

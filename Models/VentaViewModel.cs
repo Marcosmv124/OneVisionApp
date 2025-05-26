@@ -1,11 +1,9 @@
-using One_Vision.DTOs;
-using System.Collections.Generic;
-
+using  One_Vision.DTOs; 
 namespace One_Vision.Models
 {
     public class VentaViewModel
     {
-        public string ID_Paciente { get; set; }
+       public int ID_Paciente { get; set; }
 
         public decimal PrecioTotal { get; set; }
 
@@ -17,4 +15,5 @@ namespace One_Vision.Models
 
         public List<VentaProductoDTO> Productos { get; set; }
     }
+
 }

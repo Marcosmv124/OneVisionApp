@@ -1,7 +1,5 @@
 namespace One_Vision.DTOs
 {
-
-
     public class ProductoVentaDto
     {
         public int CodigoDeBarra { get; set; }

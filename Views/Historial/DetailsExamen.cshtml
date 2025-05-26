@@ -1,0 +1,626 @@
+@model One_Vision.Models.Historial
+
+@{
+    ViewData["Title"] = "Detalles del Examen Óptico";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4"><i class="bi bi-eye me-2"></i> Detalles del Examen Óptico</h2>
+
+    <!-- Tabs de navegación -->
+    <ul class="nav nav-tabs mb-4" id="formTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pagina1-tab" data-bs-toggle="tab" data-bs-target="#pagina1"
+                type="button" role="tab">Antecedentes</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pagina2-tab" data-bs-toggle="tab" data-bs-target="#pagina2" type="button"
+                role="tab">Agudeza Visual y Motilidad Ocular</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pagina3-tab" data-bs-toggle="tab" data-bs-target="#pagina3" type="button"
+                role="tab">Prueba de Oclusión</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pagina4-tab" data-bs-toggle="tab" data-bs-target="#pagina4" type="button"
+                role="tab">Retinoscopia</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pagina5-tab" data-bs-toggle="tab" data-bs-target="#pagina5" type="button"
+                role="tab">Von Graefe</button>
+        </li>
+    </ul>
+    <!-- 🔽 Agrega justo aquí -->
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="pagina1" role="tabpanel" aria-labelledby="pagina1-tab">
+            <h5 class="mt-4">Antecedentes</h5>
+            <div class="row g-4">
+                <!-- Familiar -->
+                <div class="col-md-6">
+                    <div class="border p-4 rounded bg-white shadow-sm h-100">
+                        <h6 class="fw-bold mb-3">Historia médica y ocular Familiar</h6>
+                        <p class="text-muted">
+                            @Model.Antecedente_Familiar
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Personal -->
+                <div class="col-md-6">
+                    <div class="border p-4 rounded bg-white shadow-sm h-100">
+                        <h6 class="fw-bold mb-3">Historia médica y ocular Personal</h6>
+                        <p class="text-muted">
+                            @Model.Antecedente_Personal
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas adicionales -->
+            <div class="row g-4 mt-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                        <strong>Exámenes Complementarios</strong>
+                        <hr />
+                        <p class="text-muted">@Model.Examenes_Complementarios</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                        <strong>Tiempo de uso / Hora de administración</strong>
+                        <hr />
+                        <p class="text-muted">@Model.Tiempo_de_Uso</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                        <strong>Fármaco / Toxicológico</strong>
+                        <hr />
+                        <p class="text-muted">@Model.Farmaco_Toxicológico</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="border rounded bg-light p-3 h-100 text-center shadow-sm">
+                        <strong>Síntomas / Motivo de consulta</strong>
+                        <hr />
+                        <p class="text-muted">@Model.Motivo_Sintomas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pagina2" role="tabpanel" aria-labelledby="pagina2-tab">
+            <!-- Sección Agudeza Visual -->
+            <h5 class="mt-4">Agudeza Visual</h5>
+            <div class="row g-4">
+                <!-- Sin corrección -->
+                <div class="col-md-4">
+                    <div class="border p-3 rounded bg-white shadow-sm h-100">
+                        <h6 class="fw-bold mb-3 text-center">Sin corrección</h6>
+                        <div class="row row-cols-3 g-2 text-center">
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OD_L</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OD_C</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OD_PH</p>
+                            </div>
+
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OL_L</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OL_C</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_OL_PH</p>
+                            </div>
+
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_AO_OD</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_AO_OL</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_SC_AO_OD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Con corrección -->
+                <div class="col-md-4">
+                    <div class="border p-3 rounded bg-white shadow-sm h-100">
+                        <h6 class="fw-bold mb-3 text-center">Con corrección</h6>
+                        <div class="row row-cols-3 g-2 text-center">
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OD_L</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OD_CIL</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OD_EJE</p>
+                            </div>
+
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OL_L</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OL_CIL</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.AV_L_OL_EJE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lensometría -->
+                <div class="col-md-4">
+                    <div class="border p-3 rounded bg-white shadow-sm h-100">
+                        <h6 class="fw-bold mb-3 text-center">Lensometría</h6>
+                        <div class="row row-cols-3 g-2 text-center">
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OD_ESF</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OD_CIL</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OD_EJE</p>
+                            </div>
+
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OI_ESF</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OI_CIL</p>
+                            </div>
+                            <div>
+                                <p class="form-control-plaintext">@Model.R_OI_EJE</p>
+                            </div>
+
+                            <div class="col-4">
+                                <p class="form-control-plaintext">@Model.MO_RP</p>
+                            </div>
+                            <div class="col-8">
+                                <p class="form-control-plaintext">@Model.MO_LP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motilidad Ocular -->
+            <h5 class="mt-5">Motilidad Ocular</h5>
+            <div class="border p-4 rounded bg-white shadow-sm">
+                <div class="row row-cols-3 g-3 text-center fw-semibold">
+                    <div>
+                        <p class="form-control-plaintext">@Model.MO_LP</p>
+                    </div>
+                    <div>
+                        <p class="form-control-plaintext">@Model.MOV_RP</p>
+                    </div>
+                    <div>
+                        <p class="form-control-plaintext">@Model.MOV_LP</p>
+                    </div>
+
+                    <div>
+                        <p class="form-control-plaintext">@Model.MO_V_AO</p>
+                    </div>
+                    <div>
+                        <p class="form-control-plaintext">@Model.MO_SDL</p>
+                    </div>
+                    <div>
+                        <p class="form-control-plaintext">@Model.MO_SDA</p>
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 g-3 mt-3 text-center">
+                    <div>
+                        <p class="form-control-plaintext">@Model.MO_SEG</p>
+                    </div>
+                    <div>
+                        <p class="form-control-plaintext">@Model.CT_L_T</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pagina3" role="tabpanel" aria-labelledby="pagina3-tab">
+            <div class="card shadow-sm border-0 p-3">
+                <h5 class="mb-3">COVER TEST</h5>
+
+                <!-- Lejos -->
+                <div class="border rounded p-3 mb-3 bg-light">
+                    <h6 class="fw-bold">Lejos</h6>
+                    <div class="row g-2 text-center">
+                        <div class="col-md"><strong>Tipo</strong>
+                            <p class="form-control-plaintext">@Model.CT_L_T</p>
+                            <p class="form-control-plaintext">@Model.CT_L_V</p>
+                        </div>
+                        <div class="col-md"><strong>Magnitud</strong>
+                            <p class="form-control-plaintext">@Model.CT_L_M1</p>
+                            <p class="form-control-plaintext">@Model.CT_L_M2</p>
+                        </div>
+                        <div class="col-md"><strong>Dirección</strong>
+                            <p class="form-control-plaintext">@Model.CT_L_DIR1</p>
+                            <p class="form-control-plaintext">@Model.CT_L_DIR2</p>
+                        </div>
+                        <div class="col-md"><strong>Frecuencia</strong>
+                            <p class="form-control-plaintext">@Model.CT_L_F1</p>
+                            <p class="form-control-plaintext">@Model.CT_L_F2</p>
+                        </div>
+                        <div class="col-md"><strong>Lateralidad</strong>
+                            <p class="form-control-plaintext">@Model.CT_L_L1</p>
+                            <p class="form-control-plaintext">@Model.CT_L_L2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cerca -->
+                <div class="border rounded p-3 mb-4 bg-light">
+                    <h6 class="fw-bold">Cerca</h6>
+                    <div class="row g-2 text-center">
+                        <div class="col-md"><strong>Tipo</strong>
+                            <p class="form-control-plaintext">@Model.CT_C_T</p>
+                            <p class="form-control-plaintext">@Model.CT_C_V</p>
+                        </div>
+                        <div class="col-md"><strong>Magnitud</strong>
+                            <p class="form-control-plaintext">@Model.CT_C_M1</p>
+                            <p class="form-control-plaintext">@Model.CT_C_M2</p>
+                        </div>
+                        <div class="col-md"><strong>Dirección</strong>
+                            <p class="form-control-plaintext">@Model.CT_C_DIR1</p>
+                            <p class="form-control-plaintext">@Model.CT_C_DIR2</p>
+                        </div>
+                        <div class="col-md"><strong>Frecuencia</strong>
+                            <p class="form-control-plaintext">@Model.CT_C_F1</p>
+                            <p class="form-control-plaintext">@Model.CT_C_F2</p>
+                        </div>
+                        <div class="col-md"><strong>Lateralidad</strong>
+                            <p class="form-control-plaintext">@Model.CT_C_L1</p>
+                            <p class="form-control-plaintext">@Model.CT_C_L2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos Visuales por Confrontación -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card p-3 mb-3">
+                            <h6 class="fw-bold mb-2">Campos visuales por confrontación</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>OD</h6>
+                                    <p class="text-muted">@Model.CVPC_OD</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>OI</h6>
+                                    <p class="text-muted">@Model.CVPC_OI</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rejilla de Amsler -->
+                    <div class="col-md-4">
+                        <div class="card p-3 mb-3">
+                            <h6 class="fw-bold mb-2">Rejilla de Amsler</h6>
+                            <h6>OD</h6>
+                            <p class="text-muted">@Model.RA_OD</p>
+                            <h6 class="mt-3">OI</h6>
+                            <p class="text-muted">@Model.RA_OI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oftalmoscopía -->
+                <div class="card p-3">
+                    <h6 class="fw-bold mb-2">OFTALMOSCOPIA</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>OD</h6>
+                            <p class="text-muted">@Model.H_OD</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>OI</h6>
+                            <p class="text-muted">@Model.H_OI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pagina4" role="tabpanel" aria-labelledby="pagina4-tab">
+            <div class="card shadow-sm border-0 p-3">
+                <!-- Retinoscopía -->
+                <h5 class="mb-3">Retinoscopía</h5>
+                <div class="row g-2 mb-2">
+                    <div class="col-md"><strong>OD ESF:</strong>
+                        <p class="form-control-plaintext">@Model.R_OD_ESF</p>
+                    </div>
+                    <div class="col-md"><strong>OD CIL:</strong>
+                        <p class="form-control-plaintext">@Model.R_OD_CIL</p>
+                    </div>
+                    <div class="col-md"><strong>OD EJE:</strong>
+                        <p class="form-control-plaintext">@Model.R_OD_EJE</p>
+                    </div>
+                    <div class="col-md"><strong>OD AV:</strong>
+                        <p class="form-control-plaintext">@Model.R_OD_AV</p>
+                    </div>
+                    <div class="col-md-4"><strong>Notas:</strong>
+                        <p class="form-control-plaintext">@Model.H_OD_CORD</p>
+                    </div>
+                </div>
+                <div class="row g-2 mb-4">
+                    <div class="col-md"><strong>OI ESF:</strong>
+                        <p class="form-control-plaintext">@Model.R_OI_ESF</p>
+                    </div>
+                    <div class="col-md"><strong>OI CIL:</strong>
+                        <p class="form-control-plaintext">@Model.R_OI_CIL</p>
+                    </div>
+                    <div class="col-md"><strong>OI EJE:</strong>
+                        <p class="form-control-plaintext">@Model.R_OI_EJE</p>
+                    </div>
+                    <div class="col-md"><strong>OI AV:</strong>
+                        <p class="form-control-plaintext">@Model.R_OI_AV</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subjetivos -->
+            <h5 class="mb-3">Subjetivos</h5>
+
+            <!-- Máximo positivo -->
+            <h6 class="mb-2">Máximo positivo</h6>
+            <div class="row g-2 mb-2">
+                <div class="col-md"><strong>OD ESF:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OD_ESF</p>
+                </div>
+                <div class="col-md"><strong>OD CIL:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OD_CIL</p>
+                </div>
+                <div class="col-md"><strong>OD EJE:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OD_EJE</p>
+                </div>
+                <div class="col-md"><strong>OD AV:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OD_AV</p>
+                </div>
+                <div class="col-md-4"><strong>Notas:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_N</p>
+                </div>
+            </div>
+            <div class="row g-2 mb-4">
+                <div class="col-md"><strong>OI ESF:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OI_ESF</p>
+                </div>
+                <div class="col-md"><strong>OI CIL:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OI_CIL</p>
+                </div>
+                <div class="col-md"><strong>OI EJE:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OI_EJE</p>
+                </div>
+                <div class="col-md"><strong>OI AV:</strong>
+                    <p class="form-control-plaintext">@Model.S_MP_OI_AV</p>
+                </div>
+            </div>
+
+            <!-- CCJ -->
+            <h6 class="mb-2">CCJ</h6>
+            <div class="row g-2 mb-2">
+                <div class="col-md"><strong>OD ESF:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OD_ESF</p>
+                </div>
+                <div class="col-md"><strong>OD CIL:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OD_CIL</p>
+                </div>
+                <div class="col-md"><strong>OD EJE:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OD_EJE</p>
+                </div>
+                <div class="col-md"><strong>OD AV:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OD_AV</p>
+                </div>
+                <div class="col-md-4"><strong>Notas:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_N</p>
+                </div>
+            </div>
+            <div class="row g-2">
+                <div class="col-md"><strong>OI ESF:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OI_ESF</p>
+                </div>
+                <div class="col-md"><strong>OI CIL:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OI_CIL</p>
+                </div>
+                <div class="col-md"><strong>OI EJE:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OI_EJE</p>
+                </div>
+                <div class="col-md"><strong>OI AV:</strong>
+                    <p class="form-control-plaintext">@Model.S_CCJ_OI_AV</p>
+                </div>
+            </div>
+
+            <!-- Hallazgos en Details -->
+            <div class="card shadow-sm border-0 p-3 mt-4">
+                <h5 class="text-center mb-3">Hallazgos</h5>
+                <div class="row text-center align-items-center justify-content-center">
+                    <!-- Ojo Derecho -->
+                    <div class="col-md-4">
+                        <label class="fw-bold mb-2">OJO Derecho</label>
+                        <div id="eyeRightDetail" class="eye-area border rounded mx-auto mb-2" style="pointer-events:none;"></div>
+                    </div>
+
+                    <!-- Ícono -->
+                    <div class="col-md-2 d-flex justify-content-center align-items-center gap-2">
+                        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Ojo" width="40" />
+                    </div>
+
+                    <!-- Ojo Izquierdo -->
+                    <div class="col-md-4">
+                        <label class="fw-bold mb-2">OJO Izquierdo</label>
+                        <div id="eyeLeftDetail" class="eye-area border rounded mx-auto mb-2" style="pointer-events:none;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="pagina5" role="tabpanel" aria-labelledby="pagina5-tab">
+            <div class="card shadow-sm border-0 p-3">
+                <h5 class="mb-4">VON GRAEFE</h5>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6>Horizontales Lejos</h6>
+                        <div class="row g-2">
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_HL1</p>
+                            </div>
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_HL2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Verticales Lejos</h6>
+                        <div class="row g-2">
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_VL1</p>
+                            </div>
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_VL2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6>Horizontales Cerca</h6>
+                        <div class="row g-2">
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_HC1</p>
+                            </div>
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_HC2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Verticales Cerca</h6>
+                        <div class="row g-2">
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_VC1</p>
+                            </div>
+                            <div class="col">
+                                <p class="form-control-plaintext">@Model.VG_VC2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 g-4">
+                <!-- Vergencias -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 p-3 h-100">
+                        <h6>Vergencias</h6>
+                        <p><strong>PPC Ruptura:</strong> @Model.V_PPC_RUP</p>
+                        <p><strong>PPC Recuperación:</strong> @Model.V_PPC_REC</p>
+                    </div>
+                </div>
+
+                <!-- Acomodación -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 p-3 h-100">
+                        <h6>Acomodación</h6>
+                        <div class="row text-center">
+                            <div class="col">
+                                <strong>MEM</strong>
+                                <p>OD: @Model.A_MEM_OD</p>
+                                <p>OI: @Model.A_MEM_OI</p>
+                            </div>
+                            <div class="col">
+                                <strong>CCF</strong>
+                                <p>OD: @Model.A_CCF_OD</p>
+                                <p>OI: @Model.A_CCF_OI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sensoriales -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 p-3 h-100">
+                        <h6>Sensoriales</h6>
+                        <p><strong>Luces de Worth:</strong></p>
+                        <p class="text-muted">@Model.S_LDW</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagnóstico y Plan de manejo -->
+            <div class="row mt-4 g-4">
+                <div class="col-md-6">
+                    <div class="card shadow-sm border-0 p-3 h-100">
+                        <h6 class="text-center">Diagnóstico</h6>
+                        <p class="text-muted">@Model.DIAG</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm border-0 p-3 h-100">
+                        <h6 class="text-center">Plan de manejo</h6>
+                        <p class="text-muted">@Model.PDM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- cierre de tab-content -->
+
+    <div class="mt-4 text-end">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle me-1"></i> Regresar a la lista
+        </a>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function renderMarkers(containerId, data) {
+            const container = document.getElementById(containerId);
+            if (!container || !data) return;
+
+            const coords = data.split(';');
+            coords.forEach(coord => {
+                const match = coord.match(/\(([\d.]+),([\d.]+)\)/);
+                if (match) {
+                    const x = parseFloat(match[1]);
+                    const y = parseFloat(match[2]);
+
+                    const marker = document.createElement('div');
+                    marker.className = 'marker-x';
+                    marker.style.left = `${x}px`;
+                    marker.style.top = `${y}px`;
+                    marker.innerText = 'X';
+
+                    container.appendChild(marker);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMarkers("eyeRightDetail", "@Model.H_OD_CORD");
+            renderMarkers("eyeLeftDetail", "@Model.H_OI_CORD");
+        });
+    </script>
+}
+
+

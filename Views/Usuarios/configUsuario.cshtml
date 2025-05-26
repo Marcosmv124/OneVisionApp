@@ -1,62 +1,97 @@
 ﻿@model One_Vision.DTOs.RegisterRequest
+
 @{
     ViewData["Title"] = "Configuración de Usuarios";
 }
 
-<h2>Configuración de Usuarios</h2>
-<hr />
-
-<div class="mb-3">
-    <label for="usuarioIdSelect">Seleccionar ID de Usuario</label>
-    <select id="usuarioIdSelect" class="form-select">
-        <option value="">Seleccione un usuario</option>
-        @foreach (var usuario in ViewBag.Usuarios as List<One_Vision.Models.Usuario>)
-        {
-            <option value="@usuario.ID">@usuario.ID - @usuario.Nombre</option>
-        }
-    </select>
-</div>
-
-<form asp-action="Edit" method="post">
-    <input type="hidden" id="ID" name="ID" />
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4"><i class="bi bi-person-gear me-2"></i> Configuración de Usuarios</h2>
 
     <div class="mb-3">
-        <label for="Nombre">Nombre</label>
-        <input type="text" id="Nombre" name="Nombre" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="UsuarioNombre">Nombre de Usuario</label>
-        <input type="text" id="UsuarioNombre" name="UsuarioNombre" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Correo">Correo</label>
-        <input type="email" id="Correo" name="Correo" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Password">Contraseña</label>
-        <input type="password" id="Password" name="Password" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label for="Rango">Rango</label>
-        <select id="Rango" name="Rango" class="form-select">
-            @foreach (var rango in Enum.GetValues(typeof(RolUsuario)))
+        <label for="usuarioIdSelect" class="form-label">Seleccionar ID de Usuario</label>
+        <select id="usuarioIdSelect" class="form-select" required>
+            <option value="">Seleccione un usuario</option>
+            @foreach (var usuario in ViewBag.Usuarios as List<One_Vision.Models.Usuario>)
             {
-                <option value="@((int)rango)">@rango</option>
+                <option value="@usuario.ID">@usuario.ID - @usuario.Nombre</option>
             }
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
-</form>
+    <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+        <input type="hidden" id="ID" name="ID" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" id="Nombre" name="Nombre" class="form-control" required />
+                <div class="invalid-feedback">Este campo es obligatorio.</div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="UsuarioNombre" class="form-label">Nombre de Usuario</label>
+                <input type="text" id="UsuarioNombre" name="UsuarioNombre" class="form-control" required />
+                <div class="invalid-feedback">Ingrese un nombre de usuario válido.</div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Correo" class="form-label">Correo</label>
+                <input type="email" id="Correo" name="Correo" class="form-control" required />
+                <div class="invalid-feedback">Ingrese un correo válido.</div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Password" class="form-label">Contraseña</label>
+                <input type="password" id="Password" name="Password" class="form-control" required minlength="6" />
+                <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="Rango" class="form-label">Rango</label>
+                <select id="Rango" name="Rango" class="form-select" required>
+                    @foreach (var rango in Enum.GetValues(typeof(RolUsuario)))
+                    {
+                        <option value="@((int)rango)">@rango</option>
+                    }
+                </select>
+                <div class="invalid-feedback">Seleccione un rango.</div>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i> Actualizar
+            </button>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <script>
+        // Bootstrap 5 validación front-end
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        // Obtener ID del usuario logueado desde Razor
+        const usuarioActualId = '@User.FindFirst("ID")?.Value';
+
+        // Rellenar datos del usuario seleccionado
         document.getElementById("usuarioIdSelect").addEventListener("change", function () {
-            var selectedId = this.value;
+            const selectedId = this.value;
             if (selectedId) {
                 fetch('/Usuarios/ObtenerUsuariosPorId?id=' + selectedId)
                     .then(response => response.json())
@@ -67,6 +102,15 @@
                         document.getElementById("Correo").value = data.correo;
                         document.getElementById("Password").value = data.password;
                         document.getElementById("Rango").value = data.rango;
+
+                        const selectRango = document.getElementById("Rango");
+
+                               if (parseInt(data.rango) === 0 && parseInt(data.id) !== parseInt(usuarioActualId)) {
+                                selectRango.disabled = true;
+                                } else {
+                                      selectRango.disabled = false;
+                                }
+
                     });
             }
         });

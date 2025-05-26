@@ -12,13 +12,70 @@ namespace One_Vision.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Pacientes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Edad = table.Column<int>(type: "int", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pacientes", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Productos",
+                columns: table => new
+                {
+                    CodigoDeBarra = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PrecioDeVenta = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrecioDeCompra = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Existencia = table.Column<int>(type: "int", nullable: false),
+                    Categoria = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Proveedor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Moda = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Diseño = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Productos", x => x.CodigoDeBarra);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rango = table.Column<int>(type: "int", nullable: false),
+                    EmailConfirmado = table.Column<bool>(type: "bit", nullable: false),
+                    TokenVerificacion = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Historiales",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FECHA = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    PACIENTE_ID = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    FECHA = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
+                    PacienteID = table.Column<int>(type: "int", nullable: false),
                     Antecedente_Familiar = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Antecedente_Personal = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Examenes_Complementarios = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -39,6 +96,11 @@ namespace One_Vision.Migrations
                     AV_L_OL_CIL = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     AV_L_OD_EJE = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     AV_L_OL_EJE = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    AV_L_AO_L = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    AV_L_AO_CIL = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    AV_L_AO_EJE = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    AV_L_OD_L = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AV_L_OL_L = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MO_RP = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     MO_LP = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     MOV_RP = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
@@ -125,63 +187,82 @@ namespace One_Vision.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Historiales", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Historiales_Pacientes_PacienteID",
+                        column: x => x.PacienteID,
+                        principalTable: "Pacientes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pacientes",
+                name: "Ventas",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Edad = table.Column<int>(type: "int", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pacientes", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Productos",
-                columns: table => new
-                {
-                    CodigoDeBarra = table.Column<int>(type: "int", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PrecioDeVenta = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PrecioDeCompra = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Existencia = table.Column<int>(type: "int", nullable: false),
-                    Categoria = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Proveedor = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Moda = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Diseño = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ID_Venta = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID_Paciente = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Abonado = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productos", x => x.CodigoDeBarra);
+                    table.PrimaryKey("PK_Ventas", x => x.ID_Venta);
+                    table.ForeignKey(
+                        name: "FK_Ventas_Pacientes_ID_Paciente",
+                        column: x => x.ID_Paciente,
+                        principalTable: "Pacientes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "VentaProductos",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ID_VentaProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuarioNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rango = table.Column<int>(type: "int", nullable: false),
-                    EmailConfirmado = table.Column<bool>(type: "bit", nullable: false),
-                    TokenVerificacion = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ID_Venta = table.Column<int>(type: "int", nullable: false),
+                    CodigoDeBarra = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.ID);
+                    table.PrimaryKey("PK_VentaProductos", x => x.ID_VentaProducto);
+                    table.ForeignKey(
+                        name: "FK_VentaProductos_Productos_CodigoDeBarra",
+                        column: x => x.CodigoDeBarra,
+                        principalTable: "Productos",
+                        principalColumn: "CodigoDeBarra",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VentaProductos_Ventas_ID_Venta",
+                        column: x => x.ID_Venta,
+                        principalTable: "Ventas",
+                        principalColumn: "ID_Venta",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Historiales_PacienteID",
+                table: "Historiales",
+                column: "PacienteID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VentaProductos_CodigoDeBarra",
+                table: "VentaProductos",
+                column: "CodigoDeBarra");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VentaProductos_ID_Venta",
+                table: "VentaProductos",
+                column: "ID_Venta");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ventas_ID_Paciente",
+                table: "Ventas",
+                column: "ID_Paciente");
         }
 
         /// <inheritdoc />
@@ -191,13 +272,19 @@ namespace One_Vision.Migrations
                 name: "Historiales");
 
             migrationBuilder.DropTable(
-                name: "Pacientes");
+                name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "VentaProductos");
 
             migrationBuilder.DropTable(
                 name: "Productos");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Ventas");
+
+            migrationBuilder.DropTable(
+                name: "Pacientes");
         }
     }
 }

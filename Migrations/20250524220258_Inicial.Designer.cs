@@ -12,8 +12,8 @@ using One_Vision.Models;
 namespace One_Vision.Migrations
 {
     [DbContext(typeof(OneVisionDbContext))]
-    [Migration("20250514180948_AddVentasYDetalle")]
-    partial class AddVentasYDetalle
+    [Migration("20250524220258_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,21 @@ namespace One_Vision.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("AV_L_AO_CIL")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("AV_L_AO_EJE")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("AV_L_AO_L")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
                     b.Property<string>("AV_L_OD_CIL")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -48,6 +63,10 @@ namespace One_Vision.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<string>("AV_L_OD_L")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AV_L_OL_CIL")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -62,6 +81,10 @@ namespace One_Vision.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("AV_L_OL_L")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AV_SC_AO_OD")
                         .IsRequired()
@@ -254,7 +277,6 @@ namespace One_Vision.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("FECHA")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
@@ -328,15 +350,13 @@ namespace One_Vision.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("PACIENTE_ID")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
                     b.Property<string>("PDM")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("PacienteID")
+                        .HasColumnType("int");
 
                     b.Property<string>("RA_OD")
                         .IsRequired()
@@ -555,14 +575,18 @@ namespace One_Vision.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("PacienteID");
+
                     b.ToTable("Historiales");
                 });
 
             modelBuilder.Entity("One_Vision.Models.Paciente", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Correo")
                         .IsRequired()
@@ -696,10 +720,8 @@ namespace One_Vision.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ID_Paciente")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("ID_Paciente")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
@@ -737,6 +759,17 @@ namespace One_Vision.Migrations
                     b.ToTable("VentaProductos");
                 });
 
+            modelBuilder.Entity("One_Vision.Models.Historial", b =>
+                {
+                    b.HasOne("One_Vision.Models.Paciente", "Paciente")
+                        .WithMany("Historiales")
+                        .HasForeignKey("PacienteID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Paciente");
+                });
+
             modelBuilder.Entity("One_Vision.Models.Venta", b =>
                 {
                     b.HasOne("One_Vision.Models.Paciente", "Paciente")
@@ -765,6 +798,11 @@ namespace One_Vision.Migrations
                     b.Navigation("Producto");
 
                     b.Navigation("Venta");
+                });
+
+            modelBuilder.Entity("One_Vision.Models.Paciente", b =>
+                {
+                    b.Navigation("Historiales");
                 });
 
             modelBuilder.Entity("One_Vision.Models.Venta", b =>

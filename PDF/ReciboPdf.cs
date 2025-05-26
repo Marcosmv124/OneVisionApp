@@ -33,12 +33,17 @@ namespace One_Vision.PDF
                             inner.Item().Text("Tel: 664 683 2020");
                         });
 
-                        row.ConstantColumn(150).Column(inner =>
+                        row.ConstantColumn(200).Column(inner =>
                         {
-                            inner.Item().Border(1).Padding(5).Background(Colors.Grey.Lighten3).Text("RECIBO").Bold().FontSize(14).AlignCenter();
+                            inner.Item().Border(1).Padding(5).Background(Colors.Grey.Lighten3)
+                                .Text("RECIBO").Bold().FontSize(14).AlignCenter();
+
                             inner.Item().PaddingTop(5).Text($"Folio: {Datos.ID_Venta}");
                             inner.Item().Text($"Fecha: {Datos.Fecha:dd/MM/yyyy}");
-                            inner.Item().Text($"Paciente: {Datos.ID_Paciente}");
+                            inner.Item().Text($"Paciente: {Datos.NombrePaciente}");
+                            inner.Item().Text($"Teléfono: {Datos.TelefonoPaciente}");
+                            inner.Item().Text($"Dirección: {Datos.DireccionPaciente}");
+                            inner.Item().Text($"Vendedor: {Datos.NombreUsuario}");
                         });
                     });
 
@@ -82,7 +87,6 @@ namespace One_Vision.PDF
                             r.ConstantColumn(100).AlignRight().Text($"${Datos.Abonado:0.00}");
                         });
 
-                        // Lógica para mostrar cambio o adeudo
                         if (Datos.Abonado >= Datos.Total)
                         {
                             var cambio = Datos.Abonado - Datos.Total;
@@ -103,8 +107,6 @@ namespace One_Vision.PDF
                         }
                     });
 
-
-                    // Nota de agradecimiento
                     col.Item().PaddingTop(15).Text("Gracias por su compra. ¡Vuelva pronto!").Italic().AlignCenter();
                 });
             });

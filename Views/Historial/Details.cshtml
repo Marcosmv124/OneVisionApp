@@ -1,0 +1,37 @@
+@model One_Vision.Models.Paciente
+
+@{
+    ViewData["Title"] = "One Vision";
+}
+
+<div class="card shadow-sm p-4">
+    <h2 class="mb-3 text-primary">
+        <i class="bi bi-person-lines-fill me-2"></i> Detalles del paciente
+    </h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Nombre</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3">Edad</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Edad)</dd>
+
+        <dt class="col-sm-3">Teléfono</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+
+        <dt class="col-sm-3">Correo</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Correo)</dd>
+
+        <dt class="col-sm-3">Dirección</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Direccion)</dd>
+    </dl>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model?.ID" class="btn btn-primary">
+            <i class="bi bi-pencil-fill"></i> Editar
+        </a>
+    </div>
+</div>

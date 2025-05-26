@@ -3,40 +3,69 @@
 @{
     ViewData["Title"] = "Punto de venta";
 }
-
 <div class="container mt-4">
     <div class="text-center mb-4">
         <h1 class="display-6"><i class="bi bi-shop me-2"></i>Punto de venta</h1>
+
+        @if (TempData.Peek("Exito") != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> @TempData["Exito"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        }
+
+        @if (TempData.Peek("Error") != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+        }
     </div>
-    @if (TempData["Exito"] != null)
+
+    @if (TempData["MostrarRecibo"] != null && (bool)TempData["MostrarRecibo"])
     {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Exito"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        var idVenta = TempData.Peek("ID_Venta");
+        <div class="card border-success mb-3" style="max-width: 400px;">
+            <div class="card-header bg-success text-white">✅ Venta realizada</div>
+            <div class="card-body text-dark">
+                <h5 class="card-title">Recibo rápido</h5>
+                <p class="card-text"><strong>Folio:</strong> @idVenta</p>
+                <p class="card-text"><strong>Paciente:</strong> @TempData["ID_Paciente"]</p>
+                <p class="card-text"><strong>Fecha:</strong> @TempData["Fecha"]</p>
+                <p class="card-text"><strong>Total:</strong> $@TempData["Total"]</p>
+                <p class="card-text"><strong>Abonado:</strong> $@TempData["Abonado"]</p>
+
+                <div class="d-flex gap-2">
+                    <a class="btn btn-primary"
+                       href="@Url.Action("GenerarRecibo", "PuntoVenta", new { idVenta })"
+                       target="_blank">🧾 Ver PDF</a>
+
+                    <form asp-action="EnviarReciboPorCorreo" method="post" style="display:inline;">
+                        <input type="hidden" name="idVenta" value="@idVenta" />
+                        <button type="submit" class="btn btn-success">📧 Enviar por correo</button>
+                    </form>
+                </div>
+            </div>
         </div>
     }
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-        </div>
-    }
+
     <div class="d-flex justify-content-end mb-3">
         <a asp-action="Create" class="btn btn-success">
             <i class="bi bi-person-plus-fill me-1"></i>Registrar Paciente
         </a>
     </div>
 
-    <input type="hidden" id="paginaPacientesActual" value="@Model.Pacientes.PaginaActual" />
-    <input type="hidden" id="paginaProductosActual" value="@Model.Productos.PaginaActual" />
+
+
 
     <!-- Lista de Pacientes -->
+  <div id="tablaPacientes">
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Lista de Pacientes</h5>
-            <input type="text" id="buscadorPacientes" class="form-control form-control-sm w-25"
-                placeholder="Buscar paciente..." />
+            <input type="text" id="buscadorPacientes" class="form-control form-control-sm w-25" placeholder="Buscar paciente..." />
         </div>
         <div class="card-body p-0">
             <table class="table table-hover table-striped mb-0">
@@ -60,8 +89,10 @@
                             <td>@item.Correo</td>
                             <td>@item.Direccion</td>
                             <td>
-                                <button class="btn btn-sm btn-success seleccionar-paciente" data-id="@item.ID"
-                                    data-nombre="@item.Nombre" type="button">
+                                <button class="btn btn-sm btn-success seleccionar-paciente"
+                                        data-id="@item.ID"
+                                        data-nombre="@item.Nombre"
+                                        type="button">
                                     <i class="bi bi-check-circle"></i>
                                 </button>
                             </td>
@@ -70,14 +101,39 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-center">
+            <nav>
+                <ul class="pagination justify-content-center mb-0">
+                    @if (Model.Pacientes.TienePaginaAnterior)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-paginaPacientes="@(Model.Pacientes.PaginaActual - 1)" asp-route-paginaProductos="@Model.Productos.PaginaActual">Anterior</a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.Pacientes.TotalPaginas; i++)
+                    {
+                        <li class="page-item @(i == Model.Pacientes.PaginaActual ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-paginaPacientes="@i" asp-route-paginaProductos="@Model.Productos.PaginaActual">@i</a>
+                        </li>
+                    }
+                    @if (Model.Pacientes.TienePaginaSiguiente)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-paginaPacientes="@(Model.Pacientes.PaginaActual + 1)" asp-route-paginaProductos="@Model.Productos.PaginaActual">Siguiente</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
     </div>
+  </div>
 
     <!-- Lista de Productos -->
+    <div id="tablaProductos">
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0"><i class="fas fa-box me-2"></i>Lista de Productos</h5>
-            <input type="text" id="buscadorProductos" class="form-control form-control-sm w-25"
-                placeholder="Buscar producto..." />
+            <input type="text" id="buscadorProductos" class="form-control form-control-sm w-25" placeholder="Buscar producto..." />
         </div>
         <div class="card-body p-0">
             <table class="table table-hover table-striped mb-0">
@@ -98,8 +154,9 @@
                             <td>@item.Categoria - @item.Color - @item.Diseño</td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary agregar-producto"
-                                    data-id="@item.CodigoDeBarra" data-nombre="@item.Nombre"
-                                    data-precio="@item.PrecioDeVenta">
+                                        data-id="@item.CodigoDeBarra"
+                                        data-nombre="@item.Nombre"
+                                        data-precio="@item.PrecioDeVenta">
                                     <i class="bi bi-plus-circle"></i> Agregar
                                 </button>
                             </td>
@@ -108,13 +165,40 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer text-center">
+            <nav>
+                <ul class="pagination justify-content-center mb-0">
+                    @if (Model.Productos.TienePaginaAnterior)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-paginaProductos="@(Model.Productos.PaginaActual - 1)" asp-route-paginaPacientes="@Model.Pacientes.PaginaActual">Anterior</a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.Productos.TotalPaginas; i++)
+                    {
+                        <li class="page-item @(i == Model.Productos.PaginaActual ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-paginaProductos="@i" asp-route-paginaPacientes="@Model.Pacientes.PaginaActual">@i</a>
+                        </li>
+                    }
+                    @if (Model.Productos.TienePaginaSiguiente)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-paginaProductos="@(Model.Productos.PaginaActual + 1)" asp-route-paginaPacientes="@Model.Pacientes.PaginaActual">Siguiente</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
     </div>
+  </div>
+
 
     <!-- Zona de cobro -->
     <div class="card p-3 border">
         <h4>Zona de cobro</h4>
         <form id="formFinalizarVenta" asp-action="FinalizarVenta" method="post">
             @Html.AntiForgeryToken()
+
             <input type="hidden" name="ID_Paciente" id="form-ID_Paciente" />
             <input type="hidden" name="PrecioTotal" id="form-PrecioTotal" />
             <input type="hidden" name="Anticipo" id="form-Anticipo" />
@@ -123,31 +207,29 @@
 
             <div class="row mb-2">
                 <div class="col">
-                    <input type="text" class="form-control" id="valorDolar" placeholder="Valor del dólar actual">
+                    <input type="text" class="form-control" id="valorDolar" placeholder="Valor del dólar actual" />
                 </div>
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="chkAnticipoDolar">
-                        <label class="form-check-label">Anticipo en Dólar</label>
+                        <input class="form-check-input" type="checkbox" id="chkAnticipoDolar" />
+                        <label class="form-check-label" for="chkAnticipoDolar">Anticipo en Dólar</label>
                     </div>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" id="inputAnticipo" placeholder="Anticipo">
+                    <input type="text" class="form-control" id="inputAnticipo" placeholder="Anticipo" />
                 </div>
             </div>
+
             <div class="row mb-2">
                 <div class="col">
-                    <input type="text" class="form-control" id="inputAnticipoAbonado" placeholder="Anticipo abonado"
-                        readonly>
+                    <input type="text" class="form-control" id="inputAnticipoAbonado" placeholder="Anticipo abonado" readonly />
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" id="inputPrecioTotal"
-                        placeholder="Precio total de productos" readonly>
+                    <input type="text" class="form-control" id="inputPrecioTotal" placeholder="Precio total de productos" readonly />
                 </div>
             </div>
-            <input type="text" class="form-control mb-2" id="inputTotalRestante" placeholder="Total restante" readonly>
-            <input type="text" class="form-control mb-2" id="inputCambio" placeholder="Cambio" readonly>
 
+            <input type="text" class="form-control mb-2" id="inputTotalRestante" placeholder="Total restante" readonly />
 
             <table class="table table-bordered table-sm">
                 <thead class="table-light">
@@ -167,24 +249,21 @@
                         <td id="zona-abonado">-</td>
                         <td id="zona-adeudo">-</td>
                     </tr>
-                    <tr>
-                        <td colspan="4" class="text-end fw-bold">Cambio:</td>
-                        <td id="zona-cambio">-</td>
-                    </tr>
                 </tbody>
             </table>
 
             <div class="mt-2 d-flex gap-2">
                 <button class="btn btn-primary" id="btnFinalizarVenta" type="button">Finalizar Venta</button>
                 <button class="btn btn-outline-danger" id="btnLimpiarTodo" type="button">Limpiar selección</button>
+
                 @if (TempData["UltimaVentaId"] != null)
                 {
-                    <a class="btn btn-secondary" target="_blank" asp-action="GenerarRecibo"
-                        asp-route-idVenta="@TempData["UltimaVentaId"]">
+                    <a class="btn btn-secondary" target="_blank"
+                       asp-action="GenerarRecibo"
+                       asp-route-idVenta="@TempData["UltimaVentaId"]">
                         Generar Recibo PDF
                     </a>
                 }
-
             </div>
         </form>
     </div>
@@ -193,15 +272,21 @@
 @section Scripts {
     <script>
         let productosVenta = [];
+        let pacienteAjax = null;
+        let productoAjax = null;
+        let debounceTimerPacientes;
+        let debounceTimerProductos;
 
         $(function () {
-            $(".seleccionar-paciente").on("click", function () {
+            // Selección de paciente
+            $(document).on("click", ".seleccionar-paciente", function () {
                 const id = $(this).data("id");
                 $("#form-ID_Paciente").val(id);
                 $("#zona-id-paciente").text(id);
             });
 
-            $(".agregar-producto").on("click", function () {
+            // Agregar producto
+            $(document).on("click", ".agregar-producto", function () {
                 const id = $(this).data("id");
                 const nombre = $(this).data("nombre");
                 const precio = parseFloat($(this).data("precio"));
@@ -216,7 +301,8 @@
                 actualizarZonaCobro();
             });
 
-            $("#btnFinalizarVenta").on("click", function () {
+            // Finalizar venta
+            $(document).on("click", "#btnFinalizarVenta", function () {
                 const idPaciente = $("#form-ID_Paciente").val();
                 if (!idPaciente || productosVenta.length === 0) {
                     alert("Selecciona un paciente y al menos un producto.");
@@ -247,50 +333,73 @@
                 $("#formFinalizarVenta").submit();
             });
 
-            $("#inputAnticipo, #valorDolar, #chkAnticipoDolar").on("input change", actualizarZonaCobro);
+            // Actualización en zona de cobro
+            $(document).on("input change", "#inputAnticipo, #valorDolar, #chkAnticipoDolar", actualizarZonaCobro);
 
-                  function actualizarZonaCobro() {
-            const totalVenta = productosVenta.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-            const anticipo = parseFloat($("#inputAnticipo").val()) || 0;
-            const valorDolar = parseFloat($("#valorDolar").val()) || 1;
-            const enDolar = $("#chkAnticipoDolar").is(":checked");
-            const anticipoAbonado = enDolar ? anticipo * valorDolar : anticipo;
-            const restante = Math.max(0, totalVenta - anticipoAbonado);
-            const cambio = anticipoAbonado > totalVenta ? anticipoAbonado - totalVenta : 0;
-            const lista = productosVenta.map(p => `${p.nombre} x${p.cantidad}`).join(", ");
+            function actualizarZonaCobro() {
+                const totalVenta = productosVenta.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+                const anticipo = parseFloat($("#inputAnticipo").val()) || 0;
+                const valorDolar = parseFloat($("#valorDolar").val()) || 1;
+                const enDolar = $("#chkAnticipoDolar").is(":checked");
+                const anticipoAbonado = enDolar ? anticipo * valorDolar : anticipo;
+                const restante = Math.max(0, totalVenta - anticipoAbonado);
+                const lista = productosVenta.map(p => `${p.nombre} x${p.cantidad}`).join(", ");
+                const cambio = anticipoAbonado > totalVenta ? anticipoAbonado - totalVenta : 0;
 
-            $("#zona-productos-lista").text(lista || "-");
-            $("#zona-venta").text(totalVenta.toFixed(2));
-            $("#zona-abonado").text(anticipoAbonado.toFixed(2));
-            $("#zona-adeudo").text(restante.toFixed(2));
-            $("#zona-cambio").text(cambio.toFixed(2));
+                $("#zona-productos-lista").text(lista || "-");
+                $("#zona-venta").text(totalVenta.toFixed(2));
+                $("#zona-abonado").text(anticipoAbonado.toFixed(2));
+                $("#zona-adeudo").text(restante.toFixed(2));
+                $("#zona-cambio").text(cambio.toFixed(2));
+                $("#inputPrecioTotal").val(totalVenta.toFixed(2));
+                $("#inputAnticipoAbonado").val(anticipoAbonado.toFixed(2));
+                $("#inputTotalRestante").val(restante.toFixed(2));
+                $("#inputCambio").val(cambio.toFixed(2));
+            }
 
-            $("#inputPrecioTotal").val(totalVenta.toFixed(2));
-            $("#inputAnticipoAbonado").val(anticipoAbonado.toFixed(2));
-            $("#inputTotalRestante").val(restante.toFixed(2));
-            $("#inputCambio").val(cambio.toFixed(2));
-        }
+            // Paginación AJAX dinámica
+            $(document).on("click", "#tablaProductos .pagination a, #tablaPacientes .pagination a", function (e) {
+                e.preventDefault();
+                const url = $(this).attr("href");
+                if (!url) return;
 
-                    $("#btnLimpiarTodo").on("click", function () {
-            productosVenta = [];
-            $("#form-ID_Paciente").val("");
-            $("#inputAnticipo").val("");
-            $("#inputPrecioTotal").val("");
-            $("#inputAnticipoAbonado").val("");
-            $("#inputTotalRestante").val("");
-            $("#valorDolar").val("");
-            $("#chkAnticipoDolar").prop("checked", false);
+                $.get(url, function (data) {
+                    $("#tablaPacientes").html($(data).find("#tablaPacientes").html());
+                    $("#tablaProductos").html($(data).find("#tablaProductos").html());
+                });
+            });
 
-            $("#zona-id-paciente").text("-");
-            $("#zona-productos-lista").text("-");
-            $("#zona-venta").text("-");
-            $("#zona-abonado").text("-");
-            $("#zona-adeudo").text("-");
+            // Buscador con debounce y cancelación de request activo - PACIENTES
+            $(document).on("input", "#buscadorPacientes", function () {
+                const valor = $(this).val();
+                clearTimeout(debounceTimerPacientes);
+                debounceTimerPacientes = setTimeout(function () {
+                    if (pacienteAjax) pacienteAjax.abort();
 
-            actualizarZonaCobro();
-        });
+                    const productosPage = $("#paginaProductosActual").val() || 1;
+                    pacienteAjax = $.get(`/PuntoVenta/Index?buscadorPacientes=${encodeURIComponent(valor)}&paginaPacientes=1&paginaProductos=${productosPage}`, function (data) {
+                        $("#tablaPacientes").html($(data).find("#tablaPacientes").html());
+                    });
+                }, 300);
+            });
 
+            // Buscador con debounce y cancelación de request activo - PRODUCTOS
+            $(document).on("input", "#buscadorProductos", function () {
+                const valor = $(this).val();
+                clearTimeout(debounceTimerProductos);
+                debounceTimerProductos = setTimeout(function () {
+                    if (productoAjax) productoAjax.abort();
+
+                    const pacientesPage = $("#paginaPacientesActual").val() || 1;
+                    productoAjax = $.get(`/PuntoVenta/Index?buscadorProductos=${encodeURIComponent(valor)}&paginaProductos=1&paginaPacientes=${pacientesPage}`, function (data) {
+                        $("#tablaProductos").html($(data).find("#tablaProductos").html());
+                    });
+                }, 300);
+            });
         });
     </script>
-  
 }
+
+
+
+

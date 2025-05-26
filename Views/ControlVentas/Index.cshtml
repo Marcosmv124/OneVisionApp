@@ -1,0 +1,39 @@
+﻿@model List<One_Vision.Models.Venta>
+
+@{
+    ViewData["Title"] = "Ventas";
+}
+
+<h2>Ventas realizadas</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Abonado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venta in Model)
+        {
+            <tr>
+                <td>@venta.ID_Venta</td>
+                <td>@venta.Paciente?.Nombre</td>
+                <td>@venta.Usuario?.Nombre</td>
+                <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
+                <td>$@venta.Total</td>
+                <td>$@venta.Abonado</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@venta.ID_Venta" class="btn btn-sm btn-info">
+                        <i class="bi bi-eye"></i> Ver
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
