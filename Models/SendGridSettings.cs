@@ -4,8 +4,7 @@ namespace One_Vision.Models{
       public string ApiKey { get; set; }
        public string FromEmail { get; set; }
        public string FromName { get; set; }
-        public string LocalBaseUrl { get; set; }
-        public string ProdBaseUrl { get; set; }
+        public string BaseUrl { get; set; }
     }
 
 }
