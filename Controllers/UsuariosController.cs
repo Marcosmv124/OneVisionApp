@@ -31,8 +31,9 @@ namespace One_Vision.Controllers
         }
         private string GetBaseUrl()
         {
-            return _env.IsDevelopment() ? _settings.LocalBaseUrl : _settings.ProdBaseUrl;
+            return _settings.BaseUrl;
         }
+
         // GET: Usuarios/Login
         public IActionResult Index()
         {
